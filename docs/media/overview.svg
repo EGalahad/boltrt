@@ -1,80 +1,80 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="440" viewBox="0 0 1200 440">
-<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#86868b"/></marker></defs>
-<rect x="0.0" y="0.0" width="1200.0" height="440.0" rx="0" fill="#f5f5f7"/>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#84948f"/></marker></defs>
+<rect x="0.0" y="0.0" width="1200.0" height="440.0" rx="0" fill="#f2f6f5"/>
 <rect x="24.0" y="24.0" width="368.0" height="392.0" rx="20" fill="#ffffff"/>
-<text x="52.0" y="76.0" font-family="'Inter Display', 'Inter Tight', Inter, 'Helvetica Neue', Arial, sans-serif" font-size="22" font-weight="600" fill="#1d1d1f" text-anchor="start" letter-spacing="-0.3">Modular observations</text>
-<text x="52.0" y="100.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="400" fill="#6e6e73" text-anchor="start" letter-spacing="0">Each policy composes registered terms</text>
-<text x="216.0" y="146.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="500" fill="#6e6e73" text-anchor="middle" letter-spacing="0">MimicLite</text>
-<text x="276.0" y="146.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="500" fill="#6e6e73" text-anchor="middle" letter-spacing="0">SONIC</text>
-<text x="336.0" y="146.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="500" fill="#6e6e73" text-anchor="middle" letter-spacing="0">yours</text>
-<text x="52.0" y="186.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="400" fill="#1d1d1f" text-anchor="start" letter-spacing="0">joint_pos</text>
-<rect x="208.0" y="174.0" width="16.0" height="16.0" rx="5" fill="#0071e3"/>
-<rect x="268.0" y="174.0" width="16.0" height="16.0" rx="5" fill="#0071e3"/>
-<rect x="328.0" y="174.0" width="16.0" height="16.0" rx="5" fill="#0071e3"/>
-<text x="52.0" y="218.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="400" fill="#1d1d1f" text-anchor="start" letter-spacing="0">gravity</text>
-<rect x="208.0" y="206.0" width="16.0" height="16.0" rx="5" fill="#0071e3"/>
-<rect x="268.0" y="206.0" width="16.0" height="16.0" rx="5" fill="#0071e3"/>
-<rect x="328.0" y="206.0" width="16.0" height="16.0" rx="5" fill="#0071e3"/>
-<text x="52.0" y="250.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="400" fill="#1d1d1f" text-anchor="start" letter-spacing="0">ref_joint_pos</text>
-<rect x="208.0" y="238.0" width="16.0" height="16.0" rx="5" fill="#0071e3"/>
-<rect x="268.0" y="238.0" width="16.0" height="16.0" rx="5" fill="#0071e3"/>
-<rect x="328.0" y="238.0" width="16.0" height="16.0" rx="5" fill="#e8e8ed"/>
-<text x="52.0" y="282.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="400" fill="#1d1d1f" text-anchor="start" letter-spacing="0">ref_joint_vel</text>
-<rect x="208.0" y="270.0" width="16.0" height="16.0" rx="5" fill="#e8e8ed"/>
-<rect x="268.0" y="270.0" width="16.0" height="16.0" rx="5" fill="#0071e3"/>
-<rect x="328.0" y="270.0" width="16.0" height="16.0" rx="5" fill="#e8e8ed"/>
-<text x="52.0" y="314.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="400" fill="#1d1d1f" text-anchor="start" letter-spacing="0">ref_root_pos</text>
-<rect x="208.0" y="302.0" width="16.0" height="16.0" rx="5" fill="#0071e3"/>
-<rect x="268.0" y="302.0" width="16.0" height="16.0" rx="5" fill="#e8e8ed"/>
-<rect x="328.0" y="302.0" width="16.0" height="16.0" rx="5" fill="#0071e3"/>
-<text x="52.0" y="346.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="400" fill="#1d1d1f" text-anchor="start" letter-spacing="0">ref_root_ori</text>
-<rect x="208.0" y="334.0" width="16.0" height="16.0" rx="5" fill="#0071e3"/>
-<rect x="268.0" y="334.0" width="16.0" height="16.0" rx="5" fill="#0071e3"/>
-<rect x="328.0" y="334.0" width="16.0" height="16.0" rx="5" fill="#e8e8ed"/>
-<text x="52.0" y="378.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="400" fill="#1d1d1f" text-anchor="start" letter-spacing="0">ref_body_pos</text>
-<rect x="208.0" y="366.0" width="16.0" height="16.0" rx="5" fill="#e8e8ed"/>
-<rect x="268.0" y="366.0" width="16.0" height="16.0" rx="5" fill="#e8e8ed"/>
-<rect x="328.0" y="366.0" width="16.0" height="16.0" rx="5" fill="#0071e3"/>
+<text x="52.0" y="76.0" font-family="'Inter Display', 'Inter Tight', Inter, 'Helvetica Neue', Arial, sans-serif" font-size="22" font-weight="600" fill="#13201e" text-anchor="start" letter-spacing="-0.3">Modular observations</text>
+<text x="52.0" y="100.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="400" fill="#5f6f6c" text-anchor="start" letter-spacing="0">Each policy composes registered terms</text>
+<text x="216.0" y="146.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="500" fill="#5f6f6c" text-anchor="middle" letter-spacing="0">MimicLite</text>
+<text x="276.0" y="146.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="500" fill="#5f6f6c" text-anchor="middle" letter-spacing="0">SONIC</text>
+<text x="336.0" y="146.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="500" fill="#5f6f6c" text-anchor="middle" letter-spacing="0">yours</text>
+<text x="52.0" y="186.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="400" fill="#13201e" text-anchor="start" letter-spacing="0">joint_pos</text>
+<rect x="208.0" y="174.0" width="16.0" height="16.0" rx="5" fill="#0f766e"/>
+<rect x="268.0" y="174.0" width="16.0" height="16.0" rx="5" fill="#0f766e"/>
+<rect x="328.0" y="174.0" width="16.0" height="16.0" rx="5" fill="#0f766e"/>
+<text x="52.0" y="218.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="400" fill="#13201e" text-anchor="start" letter-spacing="0">gravity</text>
+<rect x="208.0" y="206.0" width="16.0" height="16.0" rx="5" fill="#0f766e"/>
+<rect x="268.0" y="206.0" width="16.0" height="16.0" rx="5" fill="#0f766e"/>
+<rect x="328.0" y="206.0" width="16.0" height="16.0" rx="5" fill="#0f766e"/>
+<text x="52.0" y="250.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="400" fill="#13201e" text-anchor="start" letter-spacing="0">ref_joint_pos</text>
+<rect x="208.0" y="238.0" width="16.0" height="16.0" rx="5" fill="#0f766e"/>
+<rect x="268.0" y="238.0" width="16.0" height="16.0" rx="5" fill="#0f766e"/>
+<rect x="328.0" y="238.0" width="16.0" height="16.0" rx="5" fill="#e2ebe9"/>
+<text x="52.0" y="282.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="400" fill="#13201e" text-anchor="start" letter-spacing="0">ref_joint_vel</text>
+<rect x="208.0" y="270.0" width="16.0" height="16.0" rx="5" fill="#e2ebe9"/>
+<rect x="268.0" y="270.0" width="16.0" height="16.0" rx="5" fill="#0f766e"/>
+<rect x="328.0" y="270.0" width="16.0" height="16.0" rx="5" fill="#e2ebe9"/>
+<text x="52.0" y="314.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="400" fill="#13201e" text-anchor="start" letter-spacing="0">ref_root_pos</text>
+<rect x="208.0" y="302.0" width="16.0" height="16.0" rx="5" fill="#0f766e"/>
+<rect x="268.0" y="302.0" width="16.0" height="16.0" rx="5" fill="#e2ebe9"/>
+<rect x="328.0" y="302.0" width="16.0" height="16.0" rx="5" fill="#0f766e"/>
+<text x="52.0" y="346.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="400" fill="#13201e" text-anchor="start" letter-spacing="0">ref_root_ori</text>
+<rect x="208.0" y="334.0" width="16.0" height="16.0" rx="5" fill="#0f766e"/>
+<rect x="268.0" y="334.0" width="16.0" height="16.0" rx="5" fill="#0f766e"/>
+<rect x="328.0" y="334.0" width="16.0" height="16.0" rx="5" fill="#e2ebe9"/>
+<text x="52.0" y="378.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" font-weight="400" fill="#13201e" text-anchor="start" letter-spacing="0">ref_body_pos</text>
+<rect x="208.0" y="366.0" width="16.0" height="16.0" rx="5" fill="#e2ebe9"/>
+<rect x="268.0" y="366.0" width="16.0" height="16.0" rx="5" fill="#e2ebe9"/>
+<rect x="328.0" y="366.0" width="16.0" height="16.0" rx="5" fill="#0f766e"/>
 <rect x="416.0" y="24.0" width="368.0" height="392.0" rx="20" fill="#ffffff"/>
-<text x="444.0" y="76.0" font-family="'Inter Display', 'Inter Tight', Inter, 'Helvetica Neue', Arial, sans-serif" font-size="22" font-weight="600" fill="#1d1d1f" text-anchor="start" letter-spacing="-0.3">Seamless sim-to-real</text>
-<text x="444.0" y="100.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="400" fill="#6e6e73" text-anchor="start" letter-spacing="0">Sim and real share one interface</text>
-<rect x="444.0" y="124.0" width="312.0" height="46.0" rx="14" fill="#0071e3"/>
+<text x="444.0" y="76.0" font-family="'Inter Display', 'Inter Tight', Inter, 'Helvetica Neue', Arial, sans-serif" font-size="22" font-weight="600" fill="#13201e" text-anchor="start" letter-spacing="-0.3">Seamless sim-to-real</text>
+<text x="444.0" y="100.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="400" fill="#5f6f6c" text-anchor="start" letter-spacing="0">Sim and real share one interface</text>
+<rect x="444.0" y="124.0" width="312.0" height="46.0" rx="14" fill="#0f766e"/>
 <text x="600.0" y="153.0" font-family="'Inter Display', 'Inter Tight', Inter, 'Helvetica Neue', Arial, sans-serif" font-size="17" font-weight="600" fill="#ffffff" text-anchor="middle" letter-spacing="-0.2">policy loop</text>
-<path d="M576.0 175 L576.0 206" fill="none" stroke="#86868b" stroke-width="1.5" marker-end="url(#ah)"/>
-<path d="M624.0 210 L624.0 179" fill="none" stroke="#86868b" stroke-width="1.5" marker-end="url(#ah)"/>
-<rect x="444.0" y="212.0" width="312.0" height="34.0" rx="10" fill="#e8e8ed"/>
-<text x="458.0" y="234.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12.5" font-weight="500" fill="#1d1d1f" text-anchor="start" letter-spacing="0">RobotBackend</text>
-<text x="742.0" y="234.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#6e6e73" text-anchor="end" letter-spacing="0">read_state · submit</text>
-<path d="M479.2 246 L479.2 272" stroke="#86868b" stroke-width="1.5"/>
-<rect x="444.0" y="272.0" width="70.5" height="114.0" rx="14" fill="#f5f5f7"/>
-<text x="479.2" y="312.0" font-family="'Inter Display', 'Inter Tight', Inter, 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="600" fill="#1d1d1f" text-anchor="middle" letter-spacing="-0.2">MuJoCo</text>
-<text x="479.2" y="334.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#6e6e73" text-anchor="middle" letter-spacing="0">sim</text>
-<text x="479.2" y="366.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11.5" font-weight="400" fill="#1d1d1f" text-anchor="middle" letter-spacing="0">mujoco</text>
-<path d="M559.8 246 L559.8 272" stroke="#86868b" stroke-width="1.5"/>
-<rect x="524.5" y="272.0" width="70.5" height="114.0" rx="14" fill="#f5f5f7"/>
-<text x="559.8" y="312.0" font-family="'Inter Display', 'Inter Tight', Inter, 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="600" fill="#1d1d1f" text-anchor="middle" letter-spacing="-0.2">G1</text>
-<text x="559.8" y="334.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#6e6e73" text-anchor="middle" letter-spacing="0">real</text>
-<text x="559.8" y="366.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11.5" font-weight="400" fill="#1d1d1f" text-anchor="middle" letter-spacing="0">g1</text>
-<path d="M640.2 246 L640.2 272" stroke="#86868b" stroke-width="1.5"/>
-<rect x="605.0" y="272.0" width="70.5" height="114.0" rx="14" fill="#f5f5f7"/>
-<text x="640.2" y="312.0" font-family="'Inter Display', 'Inter Tight', Inter, 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="600" fill="#1d1d1f" text-anchor="middle" letter-spacing="-0.2">RP1</text>
-<text x="640.2" y="334.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#6e6e73" text-anchor="middle" letter-spacing="0">real</text>
-<text x="640.2" y="366.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11.5" font-weight="400" fill="#1d1d1f" text-anchor="middle" letter-spacing="0">rp1</text>
-<path d="M720.8 246 L720.8 272" stroke="#86868b" stroke-width="1.5"/>
-<rect x="685.5" y="272" width="70.5" height="114" rx="14" fill="none" stroke="#aeaeb2" stroke-width="1.5" stroke-dasharray="5 4"/>
-<text x="720.8" y="312.0" font-family="'Inter Display', 'Inter Tight', Inter, 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="600" fill="#6e6e73" text-anchor="middle" letter-spacing="-0.2">Yours</text>
-<text x="720.8" y="334.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#6e6e73" text-anchor="middle" letter-spacing="0">real</text>
-<text x="720.8" y="366.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11.5" font-weight="400" fill="#1d1d1f" text-anchor="middle" letter-spacing="0">...</text>
+<path d="M576.0 175 L576.0 206" fill="none" stroke="#84948f" stroke-width="1.5" marker-end="url(#ah)"/>
+<path d="M624.0 210 L624.0 179" fill="none" stroke="#84948f" stroke-width="1.5" marker-end="url(#ah)"/>
+<rect x="444.0" y="212.0" width="312.0" height="34.0" rx="10" fill="#e2ebe9"/>
+<text x="458.0" y="234.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12.5" font-weight="500" fill="#13201e" text-anchor="start" letter-spacing="0">RobotBackend</text>
+<text x="742.0" y="234.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#5f6f6c" text-anchor="end" letter-spacing="0">read_state · submit</text>
+<path d="M479.2 246 L479.2 272" stroke="#84948f" stroke-width="1.5"/>
+<rect x="444.0" y="272.0" width="70.5" height="114.0" rx="14" fill="#f2f6f5"/>
+<text x="479.2" y="312.0" font-family="'Inter Display', 'Inter Tight', Inter, 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="600" fill="#13201e" text-anchor="middle" letter-spacing="-0.2">MuJoCo</text>
+<text x="479.2" y="334.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#5f6f6c" text-anchor="middle" letter-spacing="0">sim</text>
+<text x="479.2" y="366.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11.5" font-weight="400" fill="#13201e" text-anchor="middle" letter-spacing="0">mujoco</text>
+<path d="M559.8 246 L559.8 272" stroke="#84948f" stroke-width="1.5"/>
+<rect x="524.5" y="272.0" width="70.5" height="114.0" rx="14" fill="#f2f6f5"/>
+<text x="559.8" y="312.0" font-family="'Inter Display', 'Inter Tight', Inter, 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="600" fill="#13201e" text-anchor="middle" letter-spacing="-0.2">G1</text>
+<text x="559.8" y="334.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#5f6f6c" text-anchor="middle" letter-spacing="0">real</text>
+<text x="559.8" y="366.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11.5" font-weight="400" fill="#13201e" text-anchor="middle" letter-spacing="0">g1</text>
+<path d="M640.2 246 L640.2 272" stroke="#84948f" stroke-width="1.5"/>
+<rect x="605.0" y="272.0" width="70.5" height="114.0" rx="14" fill="#f2f6f5"/>
+<text x="640.2" y="312.0" font-family="'Inter Display', 'Inter Tight', Inter, 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="600" fill="#13201e" text-anchor="middle" letter-spacing="-0.2">RP1</text>
+<text x="640.2" y="334.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#5f6f6c" text-anchor="middle" letter-spacing="0">real</text>
+<text x="640.2" y="366.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11.5" font-weight="400" fill="#13201e" text-anchor="middle" letter-spacing="0">rp1</text>
+<path d="M720.8 246 L720.8 272" stroke="#84948f" stroke-width="1.5"/>
+<rect x="685.5" y="272" width="70.5" height="114" rx="14" fill="none" stroke="#b6c4c0" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="720.8" y="312.0" font-family="'Inter Display', 'Inter Tight', Inter, 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="600" fill="#5f6f6c" text-anchor="middle" letter-spacing="-0.2">Yours</text>
+<text x="720.8" y="334.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#5f6f6c" text-anchor="middle" letter-spacing="0">real</text>
+<text x="720.8" y="366.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11.5" font-weight="400" fill="#13201e" text-anchor="middle" letter-spacing="0">...</text>
 <rect x="808.0" y="24.0" width="368.0" height="392.0" rx="20" fill="#ffffff"/>
-<text x="836.0" y="76.0" font-family="'Inter Display', 'Inter Tight', Inter, 'Helvetica Neue', Arial, sans-serif" font-size="22" font-weight="600" fill="#1d1d1f" text-anchor="start" letter-spacing="-0.3">Fast native C++</text>
-<text x="836.0" y="100.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="400" fill="#6e6e73" text-anchor="start" letter-spacing="0">Full policy step, median</text>
-<text x="836.0" y="178.0" font-family="'Inter Display', 'Inter Tight', Inter, 'Helvetica Neue', Arial, sans-serif" font-size="64" font-weight="600" fill="#1d1d1f" text-anchor="start" letter-spacing="-1.5">3.25×</text>
-<text x="836.0" y="206.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="400" fill="#6e6e73" text-anchor="start" letter-spacing="0">faster than the Python stack</text>
-<text x="836.0" y="250.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="500" fill="#1d1d1f" text-anchor="start" letter-spacing="0">Python</text>
-<rect x="836.0" y="260.0" width="242.0" height="14.0" rx="7" fill="#aeaeb2"/>
-<text x="1088.0" y="272.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="500" fill="#1d1d1f" text-anchor="start" letter-spacing="0">1.46 ms</text>
-<text x="836.0" y="306.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="500" fill="#1d1d1f" text-anchor="start" letter-spacing="0">Bolt Runtime</text>
-<rect x="836.0" y="316.0" width="74.5" height="14.0" rx="7" fill="#0071e3"/>
-<text x="920.5" y="328.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="500" fill="#1d1d1f" text-anchor="start" letter-spacing="0">0.45 ms</text>
-<text x="836.0" y="392.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#6e6e73" text-anchor="start" letter-spacing="0">Intel Core i9-13900H · 1 CPU thread</text>
+<text x="836.0" y="76.0" font-family="'Inter Display', 'Inter Tight', Inter, 'Helvetica Neue', Arial, sans-serif" font-size="22" font-weight="600" fill="#13201e" text-anchor="start" letter-spacing="-0.3">Fast native C++</text>
+<text x="836.0" y="100.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="400" fill="#5f6f6c" text-anchor="start" letter-spacing="0">Full policy step, median</text>
+<text x="836.0" y="178.0" font-family="'Inter Display', 'Inter Tight', Inter, 'Helvetica Neue', Arial, sans-serif" font-size="64" font-weight="600" fill="#13201e" text-anchor="start" letter-spacing="-1.5">3.25×</text>
+<text x="836.0" y="206.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="400" fill="#5f6f6c" text-anchor="start" letter-spacing="0">faster than the Python stack</text>
+<text x="836.0" y="250.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="500" fill="#13201e" text-anchor="start" letter-spacing="0">Python</text>
+<rect x="836.0" y="260.0" width="242.0" height="14.0" rx="7" fill="#b6c4c0"/>
+<text x="1088.0" y="272.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="500" fill="#13201e" text-anchor="start" letter-spacing="0">1.46 ms</text>
+<text x="836.0" y="306.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="500" fill="#13201e" text-anchor="start" letter-spacing="0">Bolt Runtime</text>
+<rect x="836.0" y="316.0" width="74.5" height="14.0" rx="7" fill="#0f766e"/>
+<text x="920.5" y="328.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="500" fill="#13201e" text-anchor="start" letter-spacing="0">0.45 ms</text>
+<text x="836.0" y="392.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#5f6f6c" text-anchor="start" letter-spacing="0">Intel Core i9-13900H · 1 CPU thread</text>
 </svg>

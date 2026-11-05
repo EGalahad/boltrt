@@ -3,13 +3,7 @@
 Bolt Runtime is one process with one policy loop. Simulation and hardware differ
 only in the backend object the loop talks to.
 
-```text
-                 ┌──────────── PolicyLoop (policy clock, e.g. 50 Hz) ───────────┐
- robot state ──▶ │ observation graph ──▶ ONNX Runtime ──▶ action ──▶ PD command │ ──▶ backend
-      ▲          └───────────────────────────────────────────────────────────────┘       │
-      └──────────────────────────────── read_state / submit ──────────────────────────────┘
-                                                        mujoco · g1 · rp1 · replay
-```
+![Bolt Runtime architecture: PolicyLoop over the RobotBackend interface with MuJoCo, G1, RP1 and replay backends](../media/architecture.png)
 
 ## The policy loop
 

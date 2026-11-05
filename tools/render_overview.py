@@ -1,4 +1,4 @@
-"""Render the three-panel README overview: docs/media/overview.{svg,png}.
+"""Render docs figures: docs/media/overview.{svg,png} and docs/media/architecture.{svg,png}.
 
 Usage: python3 tools/render_overview.py   (PNG export needs Inkscape)
 Latency numbers are read from docs/reference/data/performance-results.json.
@@ -12,9 +12,10 @@ from pathlib import Path
 from xml.sax.saxutils import escape
 
 ROOT = Path(__file__).resolve().parents[1]
-BAND, CARD, FILL = "#f5f5f7", "#ffffff", "#e8e8ed"
-INK, INK2, ARROW, GREY = "#1d1d1f", "#6e6e73", "#86868b", "#aeaeb2"
-BLUE = "#0071e3"
+BAND, CARD, FILL = "#f2f6f5", "#ffffff", "#e2ebe9"
+INK, INK2, ARROW, GREY = "#13201e", "#5f6f6c", "#84948f", "#b6c4c0"
+ACCENT = "#0f766e"  # teal
+ACCENT_SOFT = "#dcefec"
 DISPLAY = "'Inter Display', 'Inter Tight', Inter, 'Helvetica Neue', Arial, sans-serif"
 TEXT = "Inter, 'Helvetica Neue', Arial, sans-serif"
 MONO = "'JetBrains Mono', 'DejaVu Sans Mono', monospace"
@@ -62,14 +63,14 @@ def modular():
         y = 172 + r * 32
         out.append(text(x + 28, y + 14, term, 13, INK, MONO))
         for (_, cx), u in zip(cols, used):
-            out.append(rect(x + cx - 8, y + 2, 16, 16, 5, BLUE if term in u else FILL))
+            out.append(rect(x + cx - 8, y + 2, 16, 16, 5, ACCENT if term in u else FILL))
     return out
 
 
 def backends():
     x, out = card(1, "Seamless sim-to-real", "Sim and real share one interface")
     left, right = x + 28, x + CW - 28
-    out.append(rect(left, 124, right - left, 46, 14, BLUE))
+    out.append(rect(left, 124, right - left, 46, 14, ACCENT))
     out.append(text(x + CW / 2, 153, "policy loop", 17, "#ffffff", DISPLAY, 600, "middle", -0.2))
     out.append(arrow(f"M{x + CW / 2 - 24:.1f} 175 L{x + CW / 2 - 24:.1f} 206"))
     out.append(arrow(f"M{x + CW / 2 + 24:.1f} 210 L{x + CW / 2 + 24:.1f} 179"))
@@ -101,7 +102,7 @@ def fast(results):
     out.append(text(x + 28, 178, f"{py / bolt:.2f}×", 64, INK, DISPLAY, 600, spacing=-1.5))
     out.append(text(x + 28, 206, "faster than the Python stack", 14, INK2))
     span = CW - 56 - 70
-    for k, (name, value, color) in enumerate([("Python", py, GREY), ("Bolt Runtime", bolt, BLUE)]):
+    for k, (name, value, color) in enumerate([("Python", py, GREY), ("Bolt Runtime", bolt, ACCENT)]):
         y = 250 + k * 56
         out.append(text(x + 28, y, name, 13, INK, TEXT, 500))
         w = span * value / py
@@ -111,22 +112,89 @@ def fast(results):
     return out
 
 
-def main():
-    results = json.loads((ROOT / "docs/reference/data/performance-results.json").read_text())
-    body = [rect(0, 0, W, H, 0, BAND)] + modular() + backends() + fast(results)
-    svg = (f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}">\n'
+def node(x, y, w, h, title, lines, fill=BAND, dashed=False):
+    out = []
+    if dashed:
+        out.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{w:.1f}" height="{h:.1f}" rx="14" fill="none" '
+                   f'stroke="{GREY}" stroke-width="1.5" stroke-dasharray="5 4"/>')
+    else:
+        out.append(rect(x, y, w, h, 14, fill))
+    out.append(text(x + 18, y + 34, title, 16, INK, DISPLAY, 600, spacing=-0.2))
+    for k, line in enumerate(lines):
+        out.append(text(x + 18, y + 58 + k * 20, line, 12.5, INK2))
+    return out
+
+
+def architecture(width=1200, height=540):
+    out = [rect(0, 0, width, height, 0, BAND)]
+    left, right = 240, width - 40
+    # Row labels.
+    for y, label in [(80, "policy loop"), (326, "interface"), (446, "backends")]:
+        out.append(text(40, y, label, 12, INK2, TEXT, 500))
+    # Reference motion input (tracking task only).
+    out += node(40, 110, 170, 110, "Reference", ["file or ZMQ teleop", "--task tracking"], dashed=True)
+    # PolicyLoop card with its pipeline.
+    out.append(rect(left, 40, right - left, 214, 20, CARD))
+    out.append(text(left + 24, 78, "PolicyLoop", 20, INK, DISPLAY, 600, spacing=-0.3))
+    out.append(text(left + 148, 78, "one clock · hold / init / policy modes", 13, INK2))
+    stages = [("Observations", ["registered terms", "composed in YAML"]),
+              ("ONNX Runtime", ["CPU inference", "typed · recurrent · KV"]),
+              ("Action", ["scale · clip", "default pose"]),
+              ("Joint command", ["PD targets", "gains · feedforward"])]
+    gap, sw = 24, (right - left - 48 - 3 * 24) / 4
+    xs = [left + 24 + k * (sw + gap) for k in range(4)]
+    for k, (title, lines) in enumerate(stages):
+        out += node(xs[k], 110, sw, 120, title, lines, ACCENT_SOFT if k == 0 else BAND)
+        if k:
+            out.append(arrow(f"M{xs[k - 1] + sw + 3:.1f} 170 L{xs[k] - 3:.1f} 170"))
+    out.append(arrow(f"M212 165 L{xs[0] - 3:.1f} 165"))
+    # Interface bar and the two calls crossing it.
+    out.append(rect(left, 300, right - left, 40, 10, FILL))
+    out.append(text(left + 18, 325, "RobotBackend", 13, INK, MONO, 500))
+    out.append(text(right - 18, 325, "start · read_state · submit · stop", 12.5, INK2, TEXT, 400, "end"))
+    obs_c, cmd_c = xs[0] + sw / 2, xs[3] + sw / 2
+    out.append(arrow(f"M{obs_c:.1f} 297 L{obs_c:.1f} 236"))
+    out.append(text(obs_c + 10, 276, "read_state", 12, INK, MONO))
+    out.append(arrow(f"M{cmd_c:.1f} 234 L{cmd_c:.1f} 295"))
+    out.append(text(cmd_c + 10, 276, "submit", 12, INK, MONO))
+    # Equal backends.
+    tiles = [("MuJoCo", ["sim · physics thread", "native viewer"], "mujoco"),
+             ("Unitree G1", ["real · 500 Hz writer", "command watchdog"], "g1"),
+             ("RoboParty RP1", ["real · writer", "command watchdog"], "rp1"),
+             ("Replay", ["recorded states", "parity · timing"], "replay")]
+    tw = (right - left - 3 * 16) / 4
+    for k, (title, lines, flag) in enumerate(tiles):
+        tx = left + k * (tw + 16)
+        out.append(f'<path d="M{tx + tw / 2:.1f} 340 L{tx + tw / 2:.1f} 380" stroke="{ARROW}" stroke-width="1.5"/>')
+        out.append(rect(tx, 380, tw, 130, 14, CARD))
+        out.append(text(tx + 18, 414, title, 16, INK, DISPLAY, 600, spacing=-0.2))
+        for j, line in enumerate(lines):
+            out.append(text(tx + 18, 438 + j * 20, line, 12.5, INK2))
+        out.append(text(tx + 18, 494, f"--backend {flag}", 12, ACCENT, MONO, 500))
+    return out, width, height
+
+
+def write(name, body, width, height):
+    svg = (f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" '
+           f'viewBox="0 0 {width} {height}">\n'
            f'<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" '
            f'markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="{ARROW}"/></marker></defs>\n'
            + "\n".join(body) + "\n</svg>\n")
-    out = ROOT / "docs/media/overview.svg"
+    out = ROOT / f"docs/media/{name}.svg"
     out.write_text(svg)
     if shutil.which("inkscape"):
         png = out.with_suffix(".png")
         subprocess.run(["inkscape", str(out), "--export-type=png", f"--export-filename={png}",
-                        f"--export-width={W * 2}"], check=True, capture_output=True)
+                        f"--export-width={width * 2}"], check=True, capture_output=True)
         print(png)
     else:
         print(f"{out} (install Inkscape to export PNG)")
+
+
+def main():
+    results = json.loads((ROOT / "docs/reference/data/performance-results.json").read_text())
+    write("overview", [rect(0, 0, W, H, 0, BAND)] + modular() + backends() + fast(results), W, H)
+    write("architecture", *architecture())
 
 
 if __name__ == "__main__":
