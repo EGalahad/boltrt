@@ -10,6 +10,8 @@ struct RobotSpec {
   std::string model, root_body;
   Vec initial_q, effort, armature, friction;
   V3 initial_position{0, 0, 0.8};
+  std::filesystem::path path;
+  YAML::Node hardware; // `--backend real`: SDK driver and its parameters
 };
 struct PolicyConfig {
   YAML::Node yaml;
@@ -28,6 +30,8 @@ struct BackendConfig {
 RobotSpec load_robot(const std::filesystem::path &);
 PolicyConfig load_policy(const std::filesystem::path &, const RobotSpec &);
 BackendConfig load_backend(const std::filesystem::path &);
+// Backend for `--backend real`, built from the robot's `hardware` section.
+BackendConfig hardware_backend(const RobotSpec &);
 Vec resolve_values(const YAML::Node &, const Names &, float fallback = 0, bool require_all = false);
 Names select_names(const YAML::Node &, const Names &source, const Names &preferred);
 std::filesystem::path resolve_asset(const std::string &, const std::filesystem::path &base);

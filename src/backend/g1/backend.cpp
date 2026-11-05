@@ -47,9 +47,9 @@ class G1Driver final : public HardwareDriver {
 public:
   G1Driver(const RobotSpec &r, const BackendConfig &cfg) : config_(cfg.yaml) {
     require_keys(config_,
-                 {"type", "interface", "domain_id", "control_rate_hz", "command_timeout_s",
+                 {"driver", "interface", "domain_id", "control_rate_hz", "command_timeout_s",
                   "state_timeout_s", "startup_timeout_s", "release_motion_mode"},
-                 "g1 backend");
+                 "g1 hardware");
     if (r.joints.size() != sdk_names.size())
       throw std::runtime_error("G1 backend requires the complete SDK joint layout");
     for (auto &n : r.joints)

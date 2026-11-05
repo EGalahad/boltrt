@@ -38,7 +38,7 @@ int main(int argc, char **argv) {
     }
     if (args.count("help")) {
       std::cout << "boltrt [--task <name>] --robot <name|yaml> --policy <yaml> "
-                   "--backend <name|yaml>\n"
+                   "--backend <mujoco|real|yaml>\n"
                    "  --task tracking        Enable motion tracking; default: base\n"
                    "  --motion <npz|tcp://endpoint>   Tracking reference (optional)\n"
                    "  --validate            Check assets, observation and ONNX "
@@ -95,8 +95,11 @@ int main(int argc, char **argv) {
       return 0;
     }
     if (args.count("list-backends")) {
+      // `real` uses the robot's hardware driver; builtin drivers in this build follow.
+      std::cout << "mujoco\nreal\n";
       for (auto &n : backends.names())
-        std::cout << n << '\n';
+        if (n != "mujoco" && n != "replay")
+          std::cout << "  driver: " << n << '\n';
       return 0;
     }
     for (auto key : {"robot", "policy", "backend"})
@@ -117,7 +120,8 @@ int main(int argc, char **argv) {
     if (args.count("robot-model"))
       robot.model = s::resolve_asset(args.at("robot-model"), fs::current_path()).string();
     auto policy = s::load_policy(component("policies", args.at("policy")), robot);
-    auto cfg = s::load_backend(component("backends", args.at("backend")));
+    auto cfg = args.at("backend") == "real" ? s::hardware_backend(robot)
+                                            : s::load_backend(component("backends", args.at("backend")));
     // Hardware always runs in real time; MuJoCo and replay can run as fast as possible.
     const bool hardware = cfg.type != "mujoco" && cfg.type != "replay";
     if (args.count("headless")) {

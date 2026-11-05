@@ -169,9 +169,16 @@ RobotSpec load_robot(const std::filesystem::path &path) {
   auto n = YAML::LoadFile(path.string());
   require_keys(n,
                {"name", "joint_names", "body_names", "model", "root_body", "initial_q",
-                "initial_position", "effort_limit", "joint_armature", "joint_frictionloss"},
+                "initial_position", "effort_limit", "joint_armature", "joint_frictionloss",
+                "hardware"},
                "robot");
   RobotSpec r;
+  r.path = std::filesystem::absolute(path);
+  if (n["hardware"]) {
+    if (!n["hardware"].IsMap() || !n["hardware"]["driver"])
+      throw std::runtime_error("robot hardware section needs a driver");
+    r.hardware = n["hardware"];
+  }
   r.name = n["name"].as<std::string>();
   r.joints = n["joint_names"].as<Names>();
   r.bodies = n["body_names"].as<Names>();
@@ -267,6 +274,16 @@ BackendConfig load_backend(const std::filesystem::path &path) {
     b.realtime = b.yaml["realtime"].as<bool>();
   if (!std::isfinite(b.dt) || b.dt <= 0)
     throw std::runtime_error("invalid physics_dt");
+  return b;
+}
+BackendConfig hardware_backend(const RobotSpec &robot) {
+  if (!robot.hardware)
+    throw std::runtime_error("robot " + robot.name + " has no hardware section for --backend real");
+  BackendConfig b;
+  b.path = robot.path; // relative hardware paths resolve against the robot YAML
+  b.yaml = YAML::Clone(robot.hardware);
+  b.type = b.yaml["driver"].as<std::string>();
+  b.realtime = true;
   return b;
 }
 } // namespace boltrt
