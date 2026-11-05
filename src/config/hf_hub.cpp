@@ -4,6 +4,7 @@
 #include "hf_hub.hpp"
 #include <algorithm>
 #include <cctype>
+#include <cstdint>
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
@@ -119,7 +120,7 @@ std::string curl(const std::string &requests, const std::string &what, bool capt
   if (!WIFEXITED(status) || WEXITSTATUS(status) != 0)
     throw std::runtime_error(WIFEXITED(status) && WEXITSTATUS(status) == 127
                                  ? "curl not found; install curl or pre-populate the HF cache"
-                                 : "download failed: " + what + " (set HF_ENDPOINT for a mirror)");
+                                 : "download failed: " + what);
   return result;
 }
 } // namespace
@@ -139,12 +140,24 @@ fs::path resolve(const std::string &repo, const std::string &revision, const std
     throw std::runtime_error("asset absent from HF cache and HF_HUB_OFFLINE is set: " + reference);
 
   auto endpoint = env("HF_ENDPOINT").empty() ? std::string("https://huggingface.co") : env("HF_ENDPOINT");
-  auto api = endpoint + "/api/models/" + repo + "/revision/" + url_path(revision);
-  auto info = nlohmann::json::parse(curl("url = " + quote(api) + "\n", api, true));
-  commit = info.at("sha").get<std::string>();
+  const std::string hint = "cannot download " + reference + " from " + endpoint +
+                           ". Check the network, set HF_ENDPOINT to a reachable mirror (e.g. "
+                           "https://hf-mirror.com), or populate the HF cache and set HF_HUB_OFFLINE=1";
+  auto api = endpoint + "/api/models/" + repo + "/revision/" + url_path(revision) + "?blobs=true";
+  nlohmann::json info;
+  try {
+    info = nlohmann::json::parse(curl("url = " + quote(api) + "\n", api, true));
+    commit = info.at("sha").get<std::string>();
+  } catch (const std::exception &e) {
+    throw std::runtime_error(hint + " (" + e.what() + ")");
+  }
   auto snapshot = dir / "snapshots" / commit;
-  std::vector<std::pair<fs::path, fs::path>> moves;
-  std::string requests;
+  struct Pending {
+    std::string name;
+    fs::path tmp, target;
+    std::int64_t size;
+  };
+  std::vector<Pending> pending;
   for (auto &s : info.at("siblings")) {
     auto name = s.at("rfilename").get<std::string>();
     auto target = snapshot / name;
@@ -153,22 +166,55 @@ fs::path resolve(const std::string &repo, const std::string &revision, const std
     fs::create_directories(target.parent_path());
     auto tmp = target;
     tmp += ".incomplete." + std::to_string(getpid());
-    requests += "url = " + quote(endpoint + "/" + repo + "/resolve/" + commit + "/" + url_path(name)) +
-                "\noutput = " + quote(tmp.string()) + "\n";
-    moves.emplace_back(tmp, target);
+    pending.push_back({name, tmp, target, s.value("size", std::int64_t(-1))});
   }
-  if (!moves.empty()) {
-    std::cerr << "Downloading hf://" << repo << '@' << commit.substr(0, 7) << " (" << moves.size()
-              << " files) to " << dir.string() << std::endl;
+  // A transfer is complete only when the file exists with the size the API reported; curl's exit
+  // status alone is not reliable for parallel transfers and mirrors can return empty bodies.
+  auto complete = [](const Pending &p) {
+    std::error_code ec;
+    const auto n = fs::file_size(p.tmp, ec);
+    return !ec && (p.size < 0 ? n > 0 || p.size == 0 : std::int64_t(n) == p.size);
+  };
+  auto request = [&](const Pending &p) {
+    return "url = " + quote(endpoint + "/" + repo + "/resolve/" + commit + "/" + url_path(p.name)) +
+           "\noutput = " + quote(p.tmp.string()) + "\n";
+  };
+  if (!pending.empty()) {
+    std::cerr << "Downloading hf://" << repo << '@' << commit.substr(0, 7) << " (" << pending.size()
+              << " files) from " << endpoint << " to " << dir.string() << std::endl;
+    std::string all;
+    for (auto &p : pending)
+      all += request(p);
     try {
-      curl(requests, "hf://" + repo + "@" + revision, false);
+      curl(all, "hf://" + repo + "@" + revision, false);
     } catch (...) {
-      for (auto &m : moves)
-        fs::remove(m.first);
-      throw;
+      // Individual failures are retried below.
     }
-    for (auto &m : moves)
-      fs::rename(m.first, m.second);
+    std::vector<Pending> failed;
+    for (auto &p : pending)
+      if (!complete(p))
+        failed.push_back(p);
+    for (int attempt = 0; attempt < 2 && !failed.empty(); ++attempt) {
+      std::vector<Pending> still;
+      for (auto &p : failed) {
+        try {
+          curl(request(p), p.name, false);
+        } catch (...) {
+        }
+        if (!complete(p))
+          still.push_back(p);
+      }
+      failed.swap(still);
+    }
+    if (!failed.empty()) {
+      for (auto &p : pending)
+        fs::remove(p.tmp);
+      throw std::runtime_error(hint + " (" + std::to_string(failed.size()) + " of " +
+                               std::to_string(pending.size()) + " files incomplete, e.g. " +
+                               failed.front().name + ")");
+    }
+    for (auto &p : pending)
+      fs::rename(p.tmp, p.target);
   }
   if (!is_commit(revision)) {
     fs::create_directories(dir / "refs");
