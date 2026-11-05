@@ -28,10 +28,6 @@
 .bolt-command { background: #0d2a27; color: #d6f5ef; border-radius: 10px; padding: 24px;
   max-width: none; margin: 0; box-shadow: 0 12px 32px rgba(13, 42, 39, 0.18); }
 .bolt-command code { color: inherit; }
-.bolt-command::before { content: '● ● ●'; display: block; color: #3b5c57; letter-spacing: 2px; margin-bottom: 12px; }
-.bolt-feature { border: 1px solid #dbe5e3; border-radius: 8px; }
-.bolt-feature:hover { border-color: var(--ifm-color-primary); }
-.bolt-feature h3 { font-family: var(--ifm-font-family-monospace); font-size: 1rem; font-weight: 500; }
 .bolt-policy-list { font-family: var(--ifm-font-family-monospace); font-size: 0.95rem; }
 .bolt-agent { border: 1px dashed #b6c4c0; border-radius: 8px; }
 .menu__link { font-size: 0.9rem; }
