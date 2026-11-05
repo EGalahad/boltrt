@@ -50,7 +50,7 @@ body_names:
 - right_shoulder_yaw_link
 - right_elbow_link
 - right_wrist_link
-model: hf://elijahgalahad/rp1_model@c5f72447db96820a901dc5d7b30fb1cc2910bcbc/mjcf/serial/robot_24dof.xml
+model: hf://elijahgalahad/rp1_model@01a9010fc87ee7dbe3be30ab7c503e4ebae3c4cf/mjcf/serial/robot_24dof.xml
 root_body: base_link
 initial_q:
 - -0.1
@@ -156,3 +156,33 @@ joint_frictionloss:
   right_shoulder_yaw_joint: 0.01
   right_elbow_joint: 0.01
   right_wrist_joint: 0.01
+hardware:  # --backend real
+  driver: rp1
+  calibration: ../calibration/rp1-24dof.yaml
+  control_rate_hz: 250
+  command_timeout_s: 0.25
+  motor_joint_names:  # SDK joint order differs from the model order
+  - left_hip_pitch_joint
+  - left_hip_roll_joint
+  - left_hip_yaw_joint
+  - left_knee_joint
+  - left_ankle_pitch_joint
+  - left_ankle_roll_joint
+  - right_hip_pitch_joint
+  - right_hip_roll_joint
+  - right_hip_yaw_joint
+  - right_knee_joint
+  - right_ankle_pitch_joint
+  - right_ankle_roll_joint
+  - waist_roll_joint
+  - waist_yaw_joint
+  - left_shoulder_pitch_joint
+  - left_shoulder_roll_joint
+  - left_shoulder_yaw_joint
+  - left_elbow_joint
+  - left_wrist_roll_joint
+  - right_shoulder_pitch_joint
+  - right_shoulder_roll_joint
+  - right_shoulder_yaw_joint
+  - right_elbow_joint
+  - right_wrist_roll_joint

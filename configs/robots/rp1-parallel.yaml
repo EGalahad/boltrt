@@ -78,7 +78,7 @@ body_names:
 - right_wrist_roll_link
 - right_wrist_yaw_link
 - right_wrist_pitch_link
-model: hf://elijahgalahad/rp1_model@c5f72447db96820a901dc5d7b30fb1cc2910bcbc/mjcf/parallel/robot_28dof.xml
+model: hf://elijahgalahad/rp1_model@01a9010fc87ee7dbe3be30ab7c503e4ebae3c4cf/mjcf/parallel/robot_28dof.xml
 root_body: base_link
 initial_q:
   left_hip_pitch_joint: -0.1
@@ -248,3 +248,22 @@ joint_frictionloss:
   right_wrist_roll_joint: 0.01
   right_wrist_yaw_joint: 0.01
   right_wrist_pitch_joint: 0.01
+hardware:  # --backend real; same machine and calibration as rp1
+  driver: rp1
+  calibration: ../calibration/rp1.yaml
+  control_rate_hz: 200
+  command_timeout_s: 0.1
+  direct_ankle_motors: true  # policy commands the parallel ankle motors directly
+  passive_joint_names:  # linkage joints in the model with no motor
+  - left_ankle_pitch_joint
+  - left_ankle_roll_joint
+  - left_parallel_rod_0_u
+  - left_parallel_rod_0_v
+  - left_parallel_rod_1_u
+  - left_parallel_rod_1_v
+  - right_ankle_pitch_joint
+  - right_ankle_roll_joint
+  - right_parallel_rod_0_u
+  - right_parallel_rod_0_v
+  - right_parallel_rod_1_u
+  - right_parallel_rod_1_v

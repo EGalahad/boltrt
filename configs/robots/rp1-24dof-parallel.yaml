@@ -70,7 +70,7 @@ body_names:
 - right_shoulder_yaw_link
 - right_elbow_link
 - right_wrist_link
-model: hf://elijahgalahad/rp1_model@c5f72447db96820a901dc5d7b30fb1cc2910bcbc/mjcf/parallel/robot_24dof.xml
+model: hf://elijahgalahad/rp1_model@01a9010fc87ee7dbe3be30ab7c503e4ebae3c4cf/mjcf/parallel/robot_24dof.xml
 root_body: base_link
 initial_q:
   left_hip_pitch_joint: -0.1
