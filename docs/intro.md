@@ -12,7 +12,9 @@ deployment runtime for learned robot policies.
 - **Seamless sim-to-real**: MuJoCo and real robots implement one interface, decoupled from the policy, so switching is just `--backend`.
 - **Fast**: native C++ runs the full policy step 3.25× faster than the Python stack.
 
-![Overview](./media/overview.png)
+import {OverviewFigure} from '@site/src/components/Figures';
+
+<OverviewFigure />
 
 A run is always the combination of three configurations plus an optional task:
 

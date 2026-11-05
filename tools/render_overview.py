@@ -21,6 +21,8 @@ TEXT = "Inter, 'Helvetica Neue', Arial, sans-serif"
 MONO = "'JetBrains Mono', 'DejaVu Sans Mono', monospace"
 W, H, PAD, GAP = 1200, 440, 24, 24
 CW = (W - 2 * PAD - 2 * GAP) / 3
+LINK_ROW = 40  # extra card height for the homepage variant's "Learn more" links
+EXTRA = 0
 
 
 def text(x, y, s, size=14, fill=INK2, family=TEXT, weight=400, anchor="start", spacing=0):
@@ -40,7 +42,7 @@ def arrow(d):
 def card(i, title, subtitle):
     x = PAD + i * (CW + GAP)
     return x, [
-        rect(x, PAD, CW, H - 2 * PAD, 20, CARD),
+        rect(x, PAD, CW, H - 2 * PAD + EXTRA, 20, CARD),
         text(x + 28, PAD + 52, title, 22, INK, DISPLAY, 600, spacing=-0.3),
         text(x + 28, PAD + 76, subtitle, 14, INK2),
     ]
@@ -112,69 +114,74 @@ def fast(results):
     return out
 
 
-def node(x, y, w, h, title, lines, fill=BAND, dashed=False):
-    out = []
-    if dashed:
-        out.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{w:.1f}" height="{h:.1f}" rx="14" fill="none" '
-                   f'stroke="{GREY}" stroke-width="1.5" stroke-dasharray="5 4"/>')
-    else:
-        out.append(rect(x, y, w, h, 14, fill))
-    out.append(text(x + 18, y + 34, title, 16, INK, DISPLAY, 600, spacing=-0.2))
-    for k, line in enumerate(lines):
-        out.append(text(x + 18, y + 58 + k * 20, line, 12.5, INK2))
-    return out
-
-
-def architecture(width=1200, height=540):
+def architecture(width=1000, height=470):
+    """Docs architecture figure: fewer, larger labels and stronger contrast than the overview."""
+    ink2, line = "#3f4d4a", "#5f6f6c"
     out = [rect(0, 0, width, height, 0, BAND)]
-    left, right = 240, width - 40
-    # Row labels.
-    for y, label in [(80, "policy loop"), (326, "interface"), (446, "backends")]:
-        out.append(text(40, y, label, 12, INK2, TEXT, 500))
-    # Reference motion input (tracking task only).
-    out += node(40, 110, 170, 110, "Reference", ["file or ZMQ teleop", "--task tracking"], dashed=True)
-    # PolicyLoop card with its pipeline.
-    out.append(rect(left, 40, right - left, 214, 20, CARD))
-    out.append(text(left + 24, 78, "PolicyLoop", 20, INK, DISPLAY, 600, spacing=-0.3))
-    out.append(text(left + 148, 78, "one clock · hold / init / policy modes", 13, INK2))
-    stages = [("Observations", ["registered terms", "composed in YAML"]),
-              ("ONNX Runtime", ["CPU inference", "typed · recurrent · KV"]),
-              ("Action", ["scale · clip", "default pose"]),
-              ("Joint command", ["PD targets", "gains · feedforward"])]
-    gap, sw = 24, (right - left - 48 - 3 * 24) / 4
+
+    def box(x, y, w, h, title, sub, fill, title_fill=INK, dashed=False):
+        if dashed:
+            out.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{w:.1f}" height="{h:.1f}" rx="14" fill="none" '
+                       f'stroke="{line}" stroke-width="1.5" stroke-dasharray="6 4"/>')
+        else:
+            out.append(rect(x, y, w, h, 14, fill))
+        out.append(text(x + w / 2, y + h / 2 - 4, title, 19, title_fill, DISPLAY, 600, "middle", -0.2))
+        out.append(text(x + w / 2, y + h / 2 + 21, sub, 16, ink2, TEXT, 400, "middle"))
+
+    def link(d, both=False):
+        start = ' marker-start="url(#ahs)"' if both else ""
+        out.append(f'<path d="{d}" fill="none" stroke="{line}" stroke-width="2"{start} marker-end="url(#ahd)"/>')
+
+    # Reference input (tracking task) and the PolicyLoop card with its pipeline.
+    box(24, 112, 150, 100, "Reference", "file · ZMQ", BAND, dashed=True)
+    left, right = 200, width - 24
+    out.append(rect(left, 24, right - left, 214, 20, CARD))
+    out.append(text(left + 24, 64, "PolicyLoop", 22, INK, DISPLAY, 600, spacing=-0.3))
+    stages = [("Observations", "plug-in terms", ACCENT_SOFT), ("ONNX Runtime", "CPU inference", BAND),
+              ("Action", "scale · clip", BAND), ("Joint command", "PD targets", BAND)]
+    gap = 18
+    sw = (right - left - 48 - 3 * gap) / 4
     xs = [left + 24 + k * (sw + gap) for k in range(4)]
-    for k, (title, lines) in enumerate(stages):
-        out += node(xs[k], 110, sw, 120, title, lines, ACCENT_SOFT if k == 0 else BAND)
+    for k, (title, sub, fill) in enumerate(stages):
+        box(xs[k], 112, sw, 100, title, sub, fill)
         if k:
-            out.append(arrow(f"M{xs[k - 1] + sw + 3:.1f} 170 L{xs[k] - 3:.1f} 170"))
-    out.append(arrow(f"M212 165 L{xs[0] - 3:.1f} 165"))
-    # Interface bar and the two calls crossing it.
-    out.append(rect(left, 300, right - left, 40, 10, FILL))
-    out.append(text(left + 18, 325, "RobotBackend", 13, INK, MONO, 500))
-    out.append(text(right - 18, 325, "start · read_state · submit · stop", 12.5, INK2, TEXT, 400, "end"))
+            link(f"M{xs[k - 1] + sw + 2:.1f} 162 L{xs[k] - 3:.1f} 162")
+    link(f"M176 162 L{xs[0] - 3:.1f} 162")
+
+    # Interface bar with the two calls crossing it.
+    out.append(rect(left, 290, right - left, 46, 12, FILL))
+    out.append(text(left + 20, 319, "RobotBackend", 16, INK, MONO, 500))
+    out.append(text(right - 20, 319, "read_state · submit", 16, ink2, TEXT, 500, "end"))
     obs_c, cmd_c = xs[0] + sw / 2, xs[3] + sw / 2
-    out.append(arrow(f"M{obs_c:.1f} 297 L{obs_c:.1f} 236"))
-    out.append(text(obs_c + 10, 276, "read_state", 12, INK, MONO))
-    out.append(arrow(f"M{cmd_c:.1f} 234 L{cmd_c:.1f} 295"))
-    out.append(text(cmd_c + 10, 276, "submit", 12, INK, MONO))
+    link(f"M{obs_c:.1f} 287 L{obs_c:.1f} 218")
+    out.append(text(obs_c + 12, 258, "state", 15, INK, MONO))
+    link(f"M{cmd_c:.1f} 216 L{cmd_c:.1f} 285")
+    out.append(text(cmd_c + 12, 258, "command", 15, INK, MONO))
+
     # Equal backends.
-    tiles = [("MuJoCo", ["sim · physics thread", "native viewer"], "mujoco"),
-             ("Unitree G1", ["real · 500 Hz writer", "command watchdog"], "g1"),
-             ("RoboParty RP1", ["real · writer", "command watchdog"], "rp1"),
-             ("Replay", ["recorded states", "parity · timing"], "replay")]
-    tw = (right - left - 3 * 16) / 4
-    for k, (title, lines, flag) in enumerate(tiles):
-        tx = left + k * (tw + 16)
-        out.append(f'<path d="M{tx + tw / 2:.1f} 340 L{tx + tw / 2:.1f} 380" stroke="{ARROW}" stroke-width="1.5"/>')
-        out.append(rect(tx, 380, tw, 130, 14, CARD))
-        out.append(text(tx + 18, 414, title, 16, INK, DISPLAY, 600, spacing=-0.2))
-        for j, line in enumerate(lines):
-            out.append(text(tx + 18, 438 + j * 20, line, 12.5, INK2))
-        out.append(text(tx + 18, 494, f"--backend {flag}", 12, ACCENT, MONO, 500))
+    tiles = [("MuJoCo", "--backend mujoco"), ("Unitree G1", "--backend g1"),
+             ("RoboParty RP1", "--backend rp1"), ("Your robot", "your SDK")]
+    tgap = 16
+    tw = (right - left - 3 * tgap) / 4
+    for k, (title, flag) in enumerate(tiles):
+        tx = left + k * (tw + tgap)
+        out.append(f'<path d="M{tx + tw / 2:.1f} 336 L{tx + tw / 2:.1f} 362" stroke="{line}" stroke-width="2"/>')
+        yours = title == "Your robot"
+        if yours:
+            out.append(f'<rect x="{tx:.1f}" y="362" width="{tw:.1f}" height="84" rx="14" fill="none" '
+                       f'stroke="{line}" stroke-width="1.5" stroke-dasharray="6 4"/>')
+        else:
+            out.append(rect(tx, 362, tw, 84, 14, CARD))
+        out.append(text(tx + tw / 2, 396, title, 19, ink2 if yours else INK, DISPLAY, 600, "middle", -0.2))
+        out.append(text(tx + tw / 2, 425, flag, 15, ink2 if yours else ACCENT, MONO, 500, "middle"))
+    out.append(f'<defs><marker id="ahd" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" '
+               f'orient="auto"><path d="M0 0L10 5L0 10z" fill="{line}"/></marker>'
+               f'<marker id="ahs" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" '
+               f'orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="{line}"/></marker></defs>')
     return out, width, height
 
 
-def write(name, body, width, height):
+def write(name, body, width, height, png=True):
     svg = (f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" '
            f'viewBox="0 0 {width} {height}">\n'
            f'<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" '
@@ -182,20 +189,30 @@ def write(name, body, width, height):
            + "\n".join(body) + "\n</svg>\n")
     out = ROOT / f"docs/media/{name}.svg"
     out.write_text(svg)
-    if shutil.which("inkscape"):
+    if png and shutil.which("inkscape"):
         png = out.with_suffix(".png")
         subprocess.run(["inkscape", str(out), "--export-type=png", f"--export-filename={png}",
                         f"--export-width={width * 2}"], check=True, capture_output=True)
         print(png)
     else:
-        print(f"{out} (install Inkscape to export PNG)")
+        print(out if not png else f"{out} (install Inkscape to export PNG)")
+
+
+def learn_more():
+    return [text(PAD + i * (CW + GAP) + 28, H + EXTRA - PAD - 26, "Learn more →", 15, ACCENT, TEXT, 600)
+            for i in range(3)]
 
 
 def main():
+    global EXTRA
     results = json.loads((ROOT / "docs/reference/data/performance-results.json").read_text())
     write("overview", [rect(0, 0, W, H, 0, BAND)] + modular() + backends() + fast(results), W, H)
+    # Homepage variant: taller cards with a "Learn more" row; the page overlays links on each card.
+    EXTRA = LINK_ROW
+    body = [rect(0, 0, W, H + EXTRA, 0, BAND)] + modular() + backends() + fast(results) + learn_more()
+    write("overview-home", body, W, H + EXTRA, png=False)
+    EXTRA = 0
     write("architecture", *architecture())
-
 
 if __name__ == "__main__":
     main()

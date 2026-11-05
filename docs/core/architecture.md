@@ -3,7 +3,9 @@
 Bolt Runtime is one process with one policy loop. Simulation and hardware differ
 only in the backend object the loop talks to.
 
-![Bolt Runtime architecture: PolicyLoop over the RobotBackend interface with MuJoCo, G1, RP1 and replay backends](../media/architecture.png)
+import {ArchitectureFigure} from '@site/src/components/Figures';
+
+<ArchitectureFigure />
 
 ## The policy loop
 
