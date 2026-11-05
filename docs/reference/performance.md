@@ -1,6 +1,6 @@
 # Performance and validation
 
-![Paired CPU policy latency](media/performance.png)
+![Paired CPU policy latency](../media/performance.png)
 
 ## CPU policy-step measurement
 
@@ -9,7 +9,7 @@ On 2026-11-04, G1 + MimicLite v1.1 + `walk1_subject1`, CPU ONNX Runtime
 Both processes were pinned to CPU 0, with one ORT intra/inter-op thread and
 one OMP/MKL/OpenBLAS thread. The native build was sim-only, without a viewer.
 
-| Timed region | Python p50 (ms) | Boltrt p50 (ms) | Python max (ms) | Boltrt max (ms) |
+| Timed region | Python p50 (ms) | Bolt Runtime p50 (ms) | Python max (ms) | Bolt Runtime max (ms) |
 |---|---:|---:|---:|---:|
 | Inference adapter | 0.515776 | 0.422953 | 1.727289 | 0.984647 |
 | Full policy step | 1.458484 | 0.448937 | 3.190976 | 1.029220 |
@@ -28,7 +28,7 @@ frequency and scheduling can affect absolute values, especially maxima.
 A native headless rollout supplied one fixed robot-feedback stream. Each runtime
 replayed it outside the timer and consumed the same checkpoint and motion clip.
 Python called the existing `IntegratedPolicyRuntime.step()` implementation;
-Boltrt used its replay backend. This measures policy computation, not separate
+Bolt Runtime used its replay backend. This measures policy computation, not separate
 closed-loop trajectories. The Python checkout was not modified; source hashes
 identify its tested working-tree implementation.
 
@@ -38,15 +38,15 @@ identify its tested working-tree implementation.
 - **Inference adapter:** CPU ONNX Run plus each adapter's binding/copy overhead;
   this is not kernel-only inference latency.
 
-Raw [samples](performance-samples.csv), [metadata and hashes](performance-results.json),
-and [vector chart](media/performance.svg) are included. Native latency collection
-is available with `--timings outputs/latency.csv`; see [usage](usage.md).
+Raw [samples](data/performance-samples.csv), [metadata and hashes](data/performance-results.json),
+and [vector chart](../media/performance.svg) are included. Native latency collection
+is available with `--timings outputs/latency.csv`; see [usage](cli.md).
 
 ## Python migration parity
 
 The frozen 2026-11-02 same-state/reference-window check covered **15 external
 configurations × 32 ticks**. Maximum absolute action difference was
-**4.035234451293945e-5** (TWIST2). See [per-configuration results](parity-results.json).
+**4.035234451293945e-5** (TWIST2). See [per-configuration results](data/parity-results.json).
 This validates policy adapters separately from motion decoding or tracking quality.
 After the task/namespace restructure, all 15 exports also passed native 32-tick
 loading/execution checks.

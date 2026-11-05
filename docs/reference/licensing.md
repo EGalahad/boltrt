@@ -1,7 +1,7 @@
 # Licensing
 
-Boltrt's project-owned core, adapters and examples are **Apache-2.0**. See
-[LICENSE](../LICENSE) and [NOTICE](../NOTICE). Dependencies and downloaded robot
+Bolt Runtime's project-owned core, adapters and examples are **Apache-2.0**. See
+[LICENSE](https://github.com/EGalahad/boltrt/blob/main/LICENSE) and [NOTICE](https://github.com/EGalahad/boltrt/blob/main/NOTICE). Dependencies and downloaded robot
 assets keep their own licenses; this project does not relicense them.
 
 ## Optional RP1 integration
@@ -12,7 +12,7 @@ inference, motors and imu submodules, treated here as **GPL-3.0-only**.
 Distribute the resulting linked executable under GPL-3.0, with its corresponding
 source, build instructions and upstream notices. The Apache-2.0 license of
 independent core source files does not change. The GPL text is retained in
-[licenses/GPL-3.0.txt](licenses/GPL-3.0.txt).
+[licenses/GPL-3.0.txt](https://github.com/EGalahad/boltrt/blob/main/docs/licenses/GPL-3.0.txt).
 
 No RP1-enabled prebuilt executable is committed, uploaded or published here.
 CI builds and tests simulation only and does not download hardware SDKs.
@@ -37,8 +37,8 @@ CI builds and tests simulation only and does not download hardware SDKs.
 
 `tools/fetch-deps.sh` preserves upstream license files and source headers.
 SDK repositories are checked out unchanged at revisions in
-[dependencies.lock.json](../dependencies.lock.json). Their license files,
+[dependencies.lock.json](https://github.com/EGalahad/boltrt/blob/main/dependencies.lock.json). Their license files,
 including submodule notices, remain in the downloaded trees. Unitree's notice
-is also retained in [licenses/unitree_sdk2.txt](licenses/unitree_sdk2.txt).
+is also retained in [licenses/unitree_sdk2.txt](https://github.com/EGalahad/boltrt/blob/main/docs/licenses/unitree_sdk2.txt).
 Robot meshes and checkpoints are downloaded separately and remain subject to
 their upstream terms. See those distributions before redistributing them.

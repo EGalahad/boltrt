@@ -206,4 +206,4 @@ PROJECT LICENSING NOTICE
 Project-owned core source is Apache-2.0. The optional BOLTRT_RP1 build links
 GPL-3.0-only RoboParty code and the resulting linked binary must be distributed
 under GPL-3.0. That option is OFF by default. Upstream components retain their
-licenses. See NOTICE and docs/licensing.md for the component boundary.
+licenses. See NOTICE and docs/reference/licensing.md for the component boundary.
