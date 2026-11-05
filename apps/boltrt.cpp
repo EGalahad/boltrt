@@ -37,8 +37,8 @@ int main(int argc, char **argv) {
         throw std::runtime_error("unknown option: " + key);
     }
     if (args.count("help")) {
-      std::cout << "boltrt --robot <name|yaml> --policy <yaml> --backend "
-                   "<name|yaml> [--task <name>]\n"
+      std::cout << "boltrt [--task <name>] --robot <name|yaml> --policy <yaml> "
+                   "--backend <name|yaml>\n"
                    "  --task tracking        Enable motion tracking; default: base\n"
                    "  --motion <npz|tcp://endpoint>   Tracking reference (optional)\n"
                    "  --validate            Check assets, observation and ONNX "

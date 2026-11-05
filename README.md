@@ -51,6 +51,13 @@ All 15 external configurations match their original Python deployment within a
 maximum action difference of 4.0e-5 from identical states
 ([details](https://egalahad.github.io/boltrt/tasks/track/policies)).
 
+## Extending with a coding agent
+
+The repository ships a `boltrt-extend` skill in [`.agents/skills/`](.agents/skills/boltrt-extend)
+(also linked from `.claude/skills/`). Coding agents such as Claude Code and Codex use it to add
+robots, policies, observations and backends, with the ownership rules, verification steps and
+known pitfalls of this codebase. Ask, for example, "deploy my checkpoint on G1".
+
 ## Documentation
 
 [egalahad.github.io/boltrt](https://egalahad.github.io/boltrt/) covers the core

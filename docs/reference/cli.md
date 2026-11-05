@@ -1,7 +1,7 @@
 # CLI
 
 ```text
-boltrt --robot <name|yaml> --policy <yaml> --backend <name|yaml> [--task <name>]
+boltrt [--task <name>] --robot <name|yaml> --policy <yaml> --backend <name|yaml>
 ```
 
 | Option | Meaning |
