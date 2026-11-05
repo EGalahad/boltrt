@@ -1,0 +1,20 @@
+model_path: base_two.onnx
+joint_names_simulation:
+- a
+- b
+body_names_simulation:
+- pelvis
+policy_joint_names:
+- a
+- b
+default_joint_pos:
+  .*: 0.0
+joint_kp:
+  .*: 1.0
+joint_kd:
+  .*: 1.0
+action_scale: 1.0
+observation:
+  state:
+    position:
+      _target_: joint_pos

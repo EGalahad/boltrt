@@ -1,0 +1,226 @@
+name: rp1-24dof-parallel
+joint_names:
+- left_hip_pitch_joint
+- left_hip_roll_joint
+- left_hip_yaw_joint
+- left_knee_joint
+- left_ankle_pitch_joint
+- left_ankle_roll_joint
+- left_parallel_motor_0
+- left_parallel_rod_0_u
+- left_parallel_rod_0_v
+- left_parallel_motor_1
+- left_parallel_rod_1_u
+- left_parallel_rod_1_v
+- right_hip_pitch_joint
+- right_hip_roll_joint
+- right_hip_yaw_joint
+- right_knee_joint
+- right_ankle_pitch_joint
+- right_ankle_roll_joint
+- right_parallel_motor_0
+- right_parallel_rod_0_u
+- right_parallel_rod_0_v
+- right_parallel_motor_1
+- right_parallel_rod_1_u
+- right_parallel_rod_1_v
+- waist_roll_joint
+- waist_yaw_joint
+- left_shoulder_pitch_joint
+- left_shoulder_roll_joint
+- left_shoulder_yaw_joint
+- left_elbow_joint
+- left_wrist_joint
+- right_shoulder_pitch_joint
+- right_shoulder_roll_joint
+- right_shoulder_yaw_joint
+- right_elbow_joint
+- right_wrist_joint
+body_names:
+- base_link
+- left_hip_pitch_link
+- left_hip_roll_link
+- left_hip_yaw_link
+- left_knee_link
+- left_ankle_pitch_link
+- left_ankle_roll_link
+- left_parallel_crank_0
+- left_parallel_rod_0
+- left_parallel_crank_1
+- left_parallel_rod_1
+- right_hip_pitch_link
+- right_hip_roll_link
+- right_hip_yaw_link
+- right_knee_link
+- right_ankle_pitch_link
+- right_ankle_roll_link
+- right_parallel_crank_0
+- right_parallel_rod_0
+- right_parallel_crank_1
+- right_parallel_rod_1
+- waist_roll_link
+- waist_yaw_link
+- left_shoulder_pitch_link
+- left_shoulder_roll_link
+- left_shoulder_yaw_link
+- left_elbow_link
+- left_wrist_link
+- right_shoulder_pitch_link
+- right_shoulder_roll_link
+- right_shoulder_yaw_link
+- right_elbow_link
+- right_wrist_link
+model: hf://elijahgalahad/rp1_model@c5f72447db96820a901dc5d7b30fb1cc2910bcbc/mjcf/parallel/robot_24dof.xml
+root_body: base_link
+initial_q:
+  left_hip_pitch_joint: -0.1
+  left_hip_roll_joint: 0.0
+  left_hip_yaw_joint: 0.0
+  left_knee_joint: -0.2
+  left_ankle_pitch_joint: -0.1
+  left_ankle_roll_joint: 0.0
+  left_parallel_motor_0: -0.111402380696
+  left_parallel_rod_0_u: 0.106390204428
+  left_parallel_rod_0_v: -0.000942433834343
+  left_parallel_motor_1: 0.109846969312
+  left_parallel_rod_1_u: -0.106616914588
+  left_parallel_rod_1_v: -0.00122121651913
+  right_hip_pitch_joint: 0.1
+  right_hip_roll_joint: 0.0
+  right_hip_yaw_joint: 0.0
+  right_knee_joint: 0.2
+  right_ankle_pitch_joint: -0.1
+  right_ankle_roll_joint: 0.0
+  right_parallel_motor_0: 0.111402380696
+  right_parallel_rod_0_u: -0.106390204428
+  right_parallel_rod_0_v: -0.000942433834343
+  right_parallel_motor_1: -0.109846969312
+  right_parallel_rod_1_u: 0.106616914588
+  right_parallel_rod_1_v: -0.00122121651913
+  waist_roll_joint: 0.0
+  waist_yaw_joint: 0.0
+  left_shoulder_pitch_joint: 0.18
+  left_shoulder_roll_joint: 0.18
+  left_shoulder_yaw_joint: 0.0
+  left_elbow_joint: -1.2
+  left_wrist_joint: 0.0
+  right_shoulder_pitch_joint: -0.18
+  right_shoulder_roll_joint: -0.18
+  right_shoulder_yaw_joint: 0.0
+  right_elbow_joint: 1.2
+  right_wrist_joint: 0.0
+initial_position:
+- 0.0
+- 0.0
+- 0.78
+effort_limit:
+  left_hip_pitch_joint: 145.53
+  left_hip_roll_joint: 145.53
+  left_hip_yaw_joint: 145.53
+  left_knee_joint: 145.53
+  left_ankle_pitch_joint: 0.0
+  left_ankle_roll_joint: 0.0
+  left_parallel_motor_0: 20.0
+  left_parallel_rod_0_u: 0.0
+  left_parallel_rod_0_v: 0.0
+  left_parallel_motor_1: 20.0
+  left_parallel_rod_1_u: 0.0
+  left_parallel_rod_1_v: 0.0
+  right_hip_pitch_joint: 145.53
+  right_hip_roll_joint: 145.53
+  right_hip_yaw_joint: 145.53
+  right_knee_joint: 145.53
+  right_ankle_pitch_joint: 0.0
+  right_ankle_roll_joint: 0.0
+  right_parallel_motor_0: 20.0
+  right_parallel_rod_0_u: 0.0
+  right_parallel_rod_0_v: 0.0
+  right_parallel_motor_1: 20.0
+  right_parallel_rod_1_u: 0.0
+  right_parallel_rod_1_v: 0.0
+  waist_roll_joint: 145.53
+  waist_yaw_joint: 145.53
+  left_shoulder_pitch_joint: 28.0
+  left_shoulder_roll_joint: 28.0
+  left_shoulder_yaw_joint: 28.0
+  left_elbow_joint: 28.0
+  left_wrist_joint: 28.0
+  right_shoulder_pitch_joint: 28.0
+  right_shoulder_roll_joint: 28.0
+  right_shoulder_yaw_joint: 28.0
+  right_elbow_joint: 28.0
+  right_wrist_joint: 28.0
+joint_armature:
+  left_hip_pitch_joint: 0.029085325
+  left_hip_roll_joint: 0.029085325
+  left_hip_yaw_joint: 0.029085325
+  left_knee_joint: 0.029085325
+  left_ankle_pitch_joint: 0.0
+  left_ankle_roll_joint: 0.0
+  left_parallel_motor_0: 0.006266268
+  left_parallel_rod_0_u: 0.0
+  left_parallel_rod_0_v: 0.0
+  left_parallel_motor_1: 0.006266268
+  left_parallel_rod_1_u: 0.0
+  left_parallel_rod_1_v: 0.0
+  right_hip_pitch_joint: 0.029085325
+  right_hip_roll_joint: 0.029085325
+  right_hip_yaw_joint: 0.029085325
+  right_knee_joint: 0.029085325
+  right_ankle_pitch_joint: 0.0
+  right_ankle_roll_joint: 0.0
+  right_parallel_motor_0: 0.006266268
+  right_parallel_rod_0_u: 0.0
+  right_parallel_rod_0_v: 0.0
+  right_parallel_motor_1: 0.006266268
+  right_parallel_rod_1_u: 0.0
+  right_parallel_rod_1_v: 0.0
+  waist_roll_joint: 0.029085325
+  waist_yaw_joint: 0.029085325
+  left_shoulder_pitch_joint: 0.01
+  left_shoulder_roll_joint: 0.01
+  left_shoulder_yaw_joint: 0.01
+  left_elbow_joint: 0.01
+  left_wrist_joint: 0.01
+  right_shoulder_pitch_joint: 0.01
+  right_shoulder_roll_joint: 0.01
+  right_shoulder_yaw_joint: 0.01
+  right_elbow_joint: 0.01
+  right_wrist_joint: 0.01
+joint_frictionloss:
+  left_hip_pitch_joint: 0.01
+  left_hip_roll_joint: 0.01
+  left_hip_yaw_joint: 0.01
+  left_knee_joint: 0.01
+  left_ankle_pitch_joint: 0.0
+  left_ankle_roll_joint: 0.0
+  left_parallel_motor_0: 0.01
+  left_parallel_rod_0_u: 0.01
+  left_parallel_rod_0_v: 0.01
+  left_parallel_motor_1: 0.01
+  left_parallel_rod_1_u: 0.01
+  left_parallel_rod_1_v: 0.01
+  right_hip_pitch_joint: 0.01
+  right_hip_roll_joint: 0.01
+  right_hip_yaw_joint: 0.01
+  right_knee_joint: 0.01
+  right_ankle_pitch_joint: 0.0
+  right_ankle_roll_joint: 0.0
+  right_parallel_motor_0: 0.01
+  right_parallel_rod_0_u: 0.01
+  right_parallel_rod_0_v: 0.01
+  right_parallel_motor_1: 0.01
+  right_parallel_rod_1_u: 0.01
+  right_parallel_rod_1_v: 0.01
+  waist_roll_joint: 0.01
+  waist_yaw_joint: 0.01
+  left_shoulder_pitch_joint: 0.01
+  left_shoulder_roll_joint: 0.01
+  left_shoulder_yaw_joint: 0.01
+  left_elbow_joint: 0.01
+  left_wrist_joint: 0.01
+  right_shoulder_pitch_joint: 0.01
+  right_shoulder_roll_joint: 0.01
+  right_shoulder_yaw_joint: 0.01
+  right_elbow_joint: 0.01
+  right_wrist_joint: 0.01

@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "unitree_sdk2": {
+    "repository": "https://github.com/unitreerobotics/unitree_sdk2.git",
+    "commit": "8e1b927586712edd6a4c29d50dd52dff1e163439"
+  },
+  "roboparty_deploy": {
+    "repository": "https://github.com/Roboparty/roboparty_deploy.git",
+    "commit": "e3d05946cd17c5f886c345f6cf502ee2b6ab7bde",
+    "submodules": {
+      "src/inference": "d794fa9b25fd7518430152610f30b6c953f78ffe",
+      "src/motors": "2ee21b2f88f35bd253801d7a8142477f94e2624d",
+      "src/imu": "972df5ea07f3fb79acc7167c1a7b473655a3c262"
+    }
+  },
+  "onnxruntime": {
+    "version": "1.23.2",
+    "linux-x64-sha256": "1fa4dcaef22f6f7d5cd81b28c2800414350c10116f5fdd46a2160082551c5f9b",
+    "linux-aarch64-sha256": "7c63c73560ed76b1fac6cff8204ffe34fe180e70d6582b5332ec094810241e5c"
+  },
+  "mujoco": {
+    "version": "3.10.0",
+    "linux-x86_64-sha256": "4b9ba10f1b43fe77768c2354a9789e863972715ceed009e508c55195b35a83c6",
+    "linux-aarch64-sha256": "35141ba3e5d4cd3af14b9dc74cdb43c18128bb8379483c8da5fc3d2f630ff1ce"
+  },
+  "headers": {
+    "zmq.h": "af28f65648ab8fbf3c000bdf6395776249fc5d98d28c720f4350c61fb2d91b1a",
+    "ZMQ-LICENSE": "1f256ecad192880510e84ad60474eab7589218784b9a50bc7ceee34c2b91f1d5",
+    "nlohmann/LICENSE.MIT": "46a65cffd1ea955132d95a8dd921640714a8d6b537d2e4e482d31145ae95b603",
+    "nlohmann/json.hpp": "aaf127c04cb31c406e5b04a63f1ae89369fccde6d8fa7cdda1ed4f32dfc5de63",
+    "include/GLFW/glfw3.h": "aa370985f6b493bbe0358a36ab49f5780a6397c0209c6d98a62143dea595b73c",
+    "include/GLFW/LICENSE.md": "149704059b5d0bf551637e50042dd4de9c2cae921021f6636298911e3a5f9462",
+    "lodepng/lodepng.h": "b7588f2a55033b362e7f1b244f84f9441c292a393824730f5a85ec7f78ddbe30",
+    "lodepng/lodepng.cpp": "0a2542830190ebf3eee53cc7b098b9442b439f5a6e7534410764bc7635d602b5"
+  },
+  "glfw": {
+    "version": "3.4",
+    "runtime": "system libglfw.so.3"
+  },
+  "lodepng": {
+    "repository": "https://github.com/lvandeve/lodepng",
+    "commit": "7735153f542e54e94285dc5c1e7f196b02e15385"
+  },
+  "boost_headers": {
+    "version": "1.83.0",
+    "archive": "https://archive.ubuntu.com/ubuntu/pool/main/b/boost1.83/libboost1.83-dev_1.83.0-2.1ubuntu3.2_amd64.deb",
+    "sha256": "519ecf2c64308527e15b6582955681d192a832250baa4bc424967aaf7d02d68f",
+    "scope": "portable headers only; optional RP1 fallback, no package binaries installed"
+  }
+}

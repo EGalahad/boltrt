@@ -1,0 +1,14 @@
+/build*/
+/third_party/
+/outputs/
+*.onnx
+!tests/fixtures/*.onnx
+*.npz
+!tests/fixtures/motion/*.npz
+!tests/fixtures/motion/source_velocity/*.npz
+__pycache__/
+!tests/fixtures/motion/supplied_velocity/*.npz
+!tests/fixtures/motion/named_root/*.npz
+/CMakeUserPresets.json
+/.venv/
+*.pyc

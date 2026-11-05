@@ -1,0 +1,1 @@
+{"timestep": 0.02, "qpos_names": ["root_tx", "root_ty", "root_tz", "root_qw", "root_qx", "root_qy", "root_qz", "a", "b"], "joint_velocity_names": ["a", "b"], "joint_velocity_key": "joint_vel"}

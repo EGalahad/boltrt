@@ -1,0 +1,158 @@
+name: rp1-24dof
+joint_names:
+- left_hip_pitch_joint
+- left_hip_roll_joint
+- left_hip_yaw_joint
+- left_knee_joint
+- left_ankle_pitch_joint
+- left_ankle_roll_joint
+- right_hip_pitch_joint
+- right_hip_roll_joint
+- right_hip_yaw_joint
+- right_knee_joint
+- right_ankle_pitch_joint
+- right_ankle_roll_joint
+- waist_roll_joint
+- waist_yaw_joint
+- left_shoulder_pitch_joint
+- left_shoulder_roll_joint
+- left_shoulder_yaw_joint
+- left_elbow_joint
+- left_wrist_joint
+- right_shoulder_pitch_joint
+- right_shoulder_roll_joint
+- right_shoulder_yaw_joint
+- right_elbow_joint
+- right_wrist_joint
+body_names:
+- base_link
+- left_hip_pitch_link
+- left_hip_roll_link
+- left_hip_yaw_link
+- left_knee_link
+- left_ankle_pitch_link
+- left_ankle_roll_link
+- right_hip_pitch_link
+- right_hip_roll_link
+- right_hip_yaw_link
+- right_knee_link
+- right_ankle_pitch_link
+- right_ankle_roll_link
+- waist_roll_link
+- waist_yaw_link
+- left_shoulder_pitch_link
+- left_shoulder_roll_link
+- left_shoulder_yaw_link
+- left_elbow_link
+- left_wrist_link
+- right_shoulder_pitch_link
+- right_shoulder_roll_link
+- right_shoulder_yaw_link
+- right_elbow_link
+- right_wrist_link
+model: hf://elijahgalahad/rp1_model@c5f72447db96820a901dc5d7b30fb1cc2910bcbc/mjcf/serial/robot_24dof.xml
+root_body: base_link
+initial_q:
+- -0.1
+- 0.0
+- 0.0
+- -0.2
+- -0.1
+- 0.0
+- 0.1
+- 0.0
+- 0.0
+- 0.2
+- -0.1
+- 0.0
+- 0.0
+- 0.0
+- 0.18
+- 0.18
+- 0.0
+- -1.2
+- 0.0
+- -0.18
+- -0.18
+- 0.0
+- 1.2
+- 0.0
+initial_position:
+- 0.0
+- 0.0
+- 0.78
+effort_limit:
+  left_hip_pitch_joint: 145.53
+  left_hip_roll_joint: 145.53
+  left_hip_yaw_joint: 145.53
+  left_knee_joint: 145.53
+  left_ankle_pitch_joint: 56.0
+  left_ankle_roll_joint: 56.0
+  right_hip_pitch_joint: 145.53
+  right_hip_roll_joint: 145.53
+  right_hip_yaw_joint: 145.53
+  right_knee_joint: 145.53
+  right_ankle_pitch_joint: 56.0
+  right_ankle_roll_joint: 56.0
+  waist_roll_joint: 145.53
+  waist_yaw_joint: 145.53
+  left_shoulder_pitch_joint: 28.0
+  left_shoulder_roll_joint: 28.0
+  left_shoulder_yaw_joint: 28.0
+  left_elbow_joint: 28.0
+  left_wrist_joint: 28.0
+  right_shoulder_pitch_joint: 28.0
+  right_shoulder_roll_joint: 28.0
+  right_shoulder_yaw_joint: 28.0
+  right_elbow_joint: 28.0
+  right_wrist_joint: 28.0
+joint_armature:
+  left_hip_pitch_joint: 0.02
+  left_hip_roll_joint: 0.02
+  left_hip_yaw_joint: 0.02
+  left_knee_joint: 0.02
+  left_ankle_pitch_joint: 0.01
+  left_ankle_roll_joint: 0.01
+  right_hip_pitch_joint: 0.02
+  right_hip_roll_joint: 0.02
+  right_hip_yaw_joint: 0.02
+  right_knee_joint: 0.02
+  right_ankle_pitch_joint: 0.01
+  right_ankle_roll_joint: 0.01
+  waist_roll_joint: 0.02
+  waist_yaw_joint: 0.02
+  left_shoulder_pitch_joint: 0.01
+  left_shoulder_roll_joint: 0.01
+  left_shoulder_yaw_joint: 0.01
+  left_elbow_joint: 0.01
+  left_wrist_joint: 0.01
+  right_shoulder_pitch_joint: 0.01
+  right_shoulder_roll_joint: 0.01
+  right_shoulder_yaw_joint: 0.01
+  right_elbow_joint: 0.01
+  right_wrist_joint: 0.01
+joint_frictionloss:
+  left_hip_pitch_joint: 0.01
+  left_hip_roll_joint: 0.01
+  left_hip_yaw_joint: 0.01
+  left_knee_joint: 0.01
+  left_ankle_pitch_joint: 0.01
+  left_ankle_roll_joint: 0.01
+  right_hip_pitch_joint: 0.01
+  right_hip_roll_joint: 0.01
+  right_hip_yaw_joint: 0.01
+  right_knee_joint: 0.01
+  right_ankle_pitch_joint: 0.01
+  right_ankle_roll_joint: 0.01
+  waist_roll_joint: 0.01
+  waist_yaw_joint: 0.01
+  left_shoulder_pitch_joint: 0.01
+  left_shoulder_roll_joint: 0.01
+  left_shoulder_yaw_joint: 0.01
+  left_elbow_joint: 0.01
+  left_wrist_joint: 0.01
+  right_shoulder_pitch_joint: 0.01
+  right_shoulder_roll_joint: 0.01
+  right_shoulder_yaw_joint: 0.01
+  right_elbow_joint: 0.01
+  right_wrist_joint: 0.01

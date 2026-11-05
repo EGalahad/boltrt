@@ -1,0 +1,14 @@
+{
+  "timestep": 0.02,
+  "qpos_names": [
+    "base_link_freejoint_tx",
+    "base_link_freejoint_ty",
+    "base_link_freejoint_tz",
+    "base_link_freejoint_qw",
+    "base_link_freejoint_qx",
+    "base_link_freejoint_qy",
+    "base_link_freejoint_qz",
+    "a",
+    "b"
+  ]
+}

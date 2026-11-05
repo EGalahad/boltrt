@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "configurePresets": [
+    {"name":"sim","displayName":"Simulation only","generator":"Unix Makefiles","binaryDir":"${sourceDir}/build/sim","cacheVariables":{"CMAKE_BUILD_TYPE":"Release","BUILD_TESTING":"ON","BOLTRT_G1":"OFF","BOLTRT_RP1":"OFF","BOLTRT_VIEWER":"ON"}},
+    {"name":"ci","inherits":"sim","binaryDir":"${sourceDir}/build/ci","cacheVariables":{"BOLTRT_VIEWER":"OFF"}},
+    {"name":"robots","inherits":"sim","binaryDir":"${sourceDir}/build/robots","cacheVariables":{"BOLTRT_G1":"ON","BOLTRT_RP1":"ON"}}
+  ],
+  "buildPresets":[{"name":"sim","configurePreset":"sim"},{"name":"ci","configurePreset":"ci"},{"name":"robots","configurePreset":"robots"}],
+  "testPresets":[{"name":"sim","configurePreset":"sim","output":{"outputOnFailure":true}},{"name":"ci","configurePreset":"ci","output":{"outputOnFailure":true}},{"name":"robots","configurePreset":"robots","output":{"outputOnFailure":true}}]
+}

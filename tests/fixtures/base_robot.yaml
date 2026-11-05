@@ -1,0 +1,20 @@
+name: fixture
+joint_names:
+- a
+- b
+body_names:
+- pelvis
+root_body: pelvis
+model: motion/robot.xml
+initial_q:
+  .*: 0.0
+initial_position:
+- 0
+- 0
+- 0.8
+effort_limit:
+  .*: 10.0
+joint_armature:
+  .*: 0.0
+joint_frictionloss:
+  .*: 0.0

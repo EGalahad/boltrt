@@ -1,0 +1,33 @@
+# Native driver/interface sources only: no ROS nodes or Python bindings.
+enable_language(C)
+find_package(fmt REQUIRED)
+find_package(spdlog REQUIRED)
+find_path(BOOST_INCLUDE boost/lockfree/queue.hpp HINTS "${PROJECT_SOURCE_DIR}/third_party/boost-headers/extracted/usr/include" REQUIRED)
+foreach(module motors imu)
+  set(module_root "${RP1_SDK_ROOT}/src/${module}")
+  if(NOT EXISTS "${module_root}/src/${module}_driver.cpp" AND NOT EXISTS "${module_root}/src/motor_driver.cpp")
+    message(FATAL_ERROR "Initialize the official RP1 ${module} submodule")
+  endif()
+  file(GLOB_RECURSE sources CONFIGURE_DEPENDS "${module_root}/src/*.cpp" "${module_root}/src/*.c")
+  list(FILTER sources EXCLUDE REGEX "/pybind_module[.]cpp$")
+  add_library(rp1_sdk_${module} STATIC ${sources})
+  target_include_directories(rp1_sdk_${module} PUBLIC "${module_root}/include" "${module_root}/src" "${BOOST_INCLUDE}")
+  file(GLOB_RECURSE headers CONFIGURE_DEPENDS "${module_root}/src/*.hpp" "${module_root}/src/*.h")
+  foreach(header IN LISTS headers)
+    get_filename_component(header_dir "${header}" DIRECTORY)
+    target_include_directories(rp1_sdk_${module} PRIVATE "${header_dir}")
+  endforeach()
+  target_link_libraries(rp1_sdk_${module} PUBLIC Eigen3::Eigen fmt::fmt spdlog::spdlog Threads::Threads)
+  set_target_properties(rp1_sdk_${module} PROPERTIES CXX_STANDARD 17)
+endforeach()
+set(rp1_interface "${RP1_SDK_ROOT}/src/inference")
+add_library(rp1_sdk_robot STATIC
+  "${rp1_interface}/src/robot_interface.cpp"
+  "${rp1_interface}/src/utils/close_chain_mapping.cpp"
+  "${rp1_interface}/src/utils/decouple_rp1.cpp"
+  "${rp1_interface}/src/utils/decouple_rpo.cpp")
+target_include_directories(rp1_sdk_robot PUBLIC "${rp1_interface}/include" "${rp1_interface}/src")
+target_link_libraries(rp1_sdk_robot PUBLIC rp1_sdk_motors rp1_sdk_imu yaml-cpp)
+set_target_properties(rp1_sdk_robot PROPERTIES CXX_STANDARD 17)
+add_library(boltrt_rp1 backend.cpp)
+target_link_libraries(boltrt_rp1 PUBLIC boltrt_backend rp1_sdk_robot)

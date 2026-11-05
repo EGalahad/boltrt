@@ -1,0 +1,8 @@
+type: g1
+interface: eth0
+domain_id: 0
+control_rate_hz: 500
+command_timeout_s: 0.25
+state_timeout_s: 0.1
+startup_timeout_s: 5
+release_motion_mode: true

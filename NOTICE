@@ -1,0 +1,12 @@
+Boltrt
+Copyright 2026 Boltrt contributors
+
+The project-owned core is licensed under Apache-2.0 (LICENSE).
+Optional RoboParty integration links GPL-3.0-only software from
+roboparty_deploy and its inference, motors and imu submodules.
+BOLTRT_RP1 is OFF by default. A binary linked with that integration must be
+distributed under GPL-3.0, including corresponding source and notices.
+See docs/licensing.md and docs/licenses/GPL-3.0.txt.
+
+Downloaded dependencies retain their upstream copyright and license notices.
+No hardware-enabled prebuilt binaries are distributed by this repository.

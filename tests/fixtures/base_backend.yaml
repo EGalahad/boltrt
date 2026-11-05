@@ -1,0 +1,5 @@
+type: mujoco
+physics_dt: 0.005
+realtime: false
+viewer: false
+floor: true
