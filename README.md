@@ -47,10 +47,6 @@ Original deploy exports load as-is.
 | BFM-Zero · GRIT · HEFT · HoloMotion · Humanoid-GPT | G1 |
 | ScaleBFM · SONIC (incl. SMPL input) · TeleopIT · TWIST2 | G1 |
 
-All 15 external configurations match their original Python deployment within a
-maximum action difference of 4.0e-5 from identical states
-([details](https://egalahad.github.io/boltrt/tasks/track/policies)).
-
 ## Extending with a coding agent
 
 The repository ships a `boltrt-extend` skill in [`.agents/skills/`](.agents/skills/boltrt-extend)
