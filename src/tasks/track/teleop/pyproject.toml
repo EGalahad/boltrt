@@ -1,0 +1,34 @@
+[project]
+name = "boltrt-teleop"
+version = "0.1.0"
+description = "Reference-motion publishers (Pico / XR, NPZ) for Bolt Runtime's tracking task"
+requires-python = "==3.10.*"
+dependencies = [
+    "general-motion-retargeting",
+    "loop-rate-limiters",
+    "mjhub",
+    "mjviser",
+    "mujoco",
+    "numpy",
+    "opencv-python",
+    "pybind11",
+    "pyyaml",
+    "pyzmq",
+    "scipy",
+    "sshkeyboard",
+    "torch",
+    "tyro",
+]
+
+[tool.uv]
+package = false
+
+[tool.uv.sources]
+general-motion-retargeting = { git = "https://github.com/YanjieZe/GMR.git", rev = "25f56db79ac411258b377b6d4ccba0c8ff3372ac" }
+mjhub = { git = "https://github.com/EGalahad/mjhub.git", branch = "main" }
+torch = { index = "pytorch-cpu" }
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
