@@ -18,7 +18,7 @@ simulation to hardware is a flag:
 
 ```bash
 boltrt --robot g1 --policy policy.yaml --backend mujoco
-boltrt --robot g1 --policy policy.yaml --backend g1
+boltrt --robot g1 --policy policy.yaml --backend real
 ```
 
 ## MuJoCo

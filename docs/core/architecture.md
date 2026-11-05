@@ -58,5 +58,6 @@ src/
   tasks/track/             tracking task: loop, motion sources, policy-family observations
   utils/                   ONNX inference, MuJoCo model loading and FK
 configs/robots/            builtin robots
-configs/backends/          builtin backends
+configs/backends/          simulation backend (mujoco)
+configs/calibration/       machine-specific SDK calibration (git-ignored)
 ```

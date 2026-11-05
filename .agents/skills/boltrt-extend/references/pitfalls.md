@@ -18,6 +18,15 @@
 - A training-only field (`noise_std`, `bias_noise_std`, randomization) is being
   applied. Deployment must accept and ignore them.
 
+## Real robot behaves badly although sim2sim is fine
+
+- First run a checkpoint known to work on that robot with the same backend and
+  calibration. If it works, the runtime path is fine and the policy is the suspect.
+- Record with `--record`, then compare observations against sim from the same
+  state. Training-only domain randomization (action delay, filters, noise) is
+  never applied at deployment, so a policy trained without delay randomization can
+  be fragile on hardware.
+
 ## Load error: unknown key / missing name
 
 - Unknown observation key: add training-only keys to the term's `require_keys`
@@ -60,4 +69,8 @@
 - Parallel-ankle conversions may happen on the robot side; do not invent a
   kinematic solution the SDK does not document.
 - Set the real network interface / CAN devices and calibration; bundled RP1
-  calibration is an example.
+  calibration is an example and the runtime refuses to start with it.
+- RP1 calibration `robot.type` must be `rp1` for the pinned SDK; older files say
+  `rp1.3` (same solver) and fail at device start with "Unknown close_chain type".
+- Parallel-ankle robots have more model joints than motors: list the linkage
+  joints as `passive_joint_names` and set `direct_ankle_motors: true`.

@@ -59,7 +59,7 @@ uv run --project src/tasks/track/teleop src/tasks/track/teleop/npz_pub.py \
 ```
 
 If the publisher runs on another machine, point `--motion` at it:
-`--motion tcp://<publisher-ip>:28701`. Use `--backend g1` for the real robot.
+`--motion tcp://<publisher-ip>:28701`. Use `--backend real` for the real robot.
 
 ### Controls
 

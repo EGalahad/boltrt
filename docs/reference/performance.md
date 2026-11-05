@@ -42,6 +42,22 @@ Raw [samples](data/performance-samples.csv), [metadata and hashes](data/performa
 and [vector chart](../media/performance.svg) are included. Native latency collection
 is available with `--timings outputs/latency.csv`; see [usage](cli.md).
 
+## Onboard CPU (RP1, RK3588)
+
+On 2026-11-05 the same workload ran on the RP1's onboard computer: RK3588,
+pinned to one Cortex-A76 core at 2.4 GHz (`performance` governor), ONNX Runtime
+CPU with one thread, Python 3.10 with the original sim2real runtime. Five
+alternating trials of 200 warmup and 2,000 measured steps per runtime.
+
+| Timed region | Python p50 (ms) | Bolt Runtime p50 (ms) | Python max (ms) | Bolt Runtime max (ms) |
+|---|---:|---:|---:|---:|
+| Inference adapter | 0.824 | 0.730 | 0.967 | 0.806 |
+| Full policy step | 2.039 | 0.787 | 2.319 | 0.867 |
+
+The median policy step is **2.59× faster** on this core. As on the desktop, the
+gain is in observation, reference and runtime overhead; inference itself uses the
+same ONNX Runtime. Raw samples: [rp1-samples.csv](data/rp1-samples.csv).
+
 ## Python migration parity
 
 The frozen 2026-11-02 same-state/reference-window check covered **15 external

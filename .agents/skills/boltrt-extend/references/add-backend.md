@@ -6,7 +6,7 @@
    `BOLTRT_<NAME>` CMake option if it needs an external SDK, default OFF.
 3. Hardware: reuse the inline hardware scheduler (high-rate writer, command and
    state watchdog). Map motors by joint name.
-4. `configs/backends/<name>.yaml` with `type: <name>` and device settings.
+4. Hardware: a `hardware` section in the robot config (`driver: <name>` plus device settings), selected with `--backend real`. Machine calibration goes in git-ignored `configs/calibration/`. Simulation backends: `configs/backends/<name>.yaml` with `type: <name>`.
 5. Fetch SDKs from the vendor's official repository at a pinned commit; never
    copy an SDK from another project. Check its license before linking (GPL code
    makes the linked binary GPL).

@@ -16,4 +16,4 @@ Rules that keep robots reusable:
   verify by comparing a rollout before and after.
 - A different kinematic structure (for example a parallel ankle instead of a
   serial one) is a different robot with its own name.
-- For hardware, add a matching backend config; see [Real robots](../real-robots.md).
+- For hardware, add a `hardware` section (driver, calibration, rates) so `--backend real` works; see [Real robots](../real-robots.md).

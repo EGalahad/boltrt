@@ -6,7 +6,7 @@
    by name between the robot config and the SDK's motor order.
 3. Register a factory with `BackendRegistry::add` and add a build option if the
    backend needs an external SDK.
-4. Add `configs/backends/<name>.yaml` with `type: <name>`.
+4. For hardware, add a `hardware` section with `driver: <name>` to the robot config; `--backend real` uses it. Simulation backends get `configs/backends/<name>.yaml` with `type: <name>`.
 
 Hardware backends should reuse the shared inline hardware scheduler, which runs
 the high-rate command writer and the command/state watchdog.

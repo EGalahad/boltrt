@@ -55,8 +55,9 @@ is still read. New exports should embed `onnx.in_keys/out_keys` in the YAML.
 
 ## Backend
 
-`configs/backends/<name>.yaml` selects and parameterizes a backend; see
-[Backends](backends.md). Builtin configs: `mujoco`, `g1`, `rp1` (24 DoF), `rp1-28dof`.
+`--backend mujoco` simulates; `--backend real` drives the hardware described by the
+robot's `hardware` section (driver, calibration, rates; see [Real robots](../real-robots.md)).
+A backend YAML path can also be given, e.g. for the replay backend; see [Backends](backends.md).
 
 ## Paths and assets
 
