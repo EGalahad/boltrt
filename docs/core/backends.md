@@ -46,8 +46,28 @@ configuration: [Real robots](../real-robots.md).
 
 ## Replay
 
-`replay` feeds recorded robot states into the loop without simulating anything.
-It is used for latency measurement and same-state parity checks.
+`replay` feeds recorded robot states into the loop without simulating anything,
+and discards the commands. Use it to reproduce a run offline, to debug a state
+sequence recorded on hardware, or for latency measurement and same-state parity
+checks.
+
+```yaml
+# replay.yaml
+type: replay
+path: states.jsonl   # e.g. the output of --record
+```
+
+```bash
+boltrt --task tracking --robot g1 --policy policy.yaml --backend mujoco \
+  --motion walk.npz --headless --start --record states.jsonl
+boltrt --task tracking --robot g1 --policy policy.yaml --backend replay.yaml \
+  --motion walk.npz --headless --start --record replayed.jsonl
+```
+
+Each line needs `q`, `dq`, `orientation` (wxyz), `angular_velocity`, `tick` and
+`time`; `root_position` is optional. Like MuJoCo, the replay advances to the next
+line only after a command is submitted, so tick *i* sees recorded line *i* and a
+replayed run reproduces the recorded actions. The run ends at the end of the file.
 
 ## Adding a backend
 

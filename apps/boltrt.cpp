@@ -118,15 +118,18 @@ int main(int argc, char **argv) {
       robot.model = s::resolve_asset(args.at("robot-model"), fs::current_path()).string();
     auto policy = s::load_policy(component("policies", args.at("policy")), robot);
     auto cfg = s::load_backend(component("backends", args.at("backend")));
+    // Hardware always runs in real time; MuJoCo and replay can run as fast as possible.
+    const bool hardware = cfg.type != "mujoco" && cfg.type != "replay";
     if (args.count("headless")) {
-      if (cfg.type != "mujoco")
-        throw std::runtime_error("--headless requires the mujoco backend");
-      cfg.yaml["viewer"] = false;
+      if (hardware)
+        throw std::runtime_error("--headless requires the mujoco or replay backend");
+      if (cfg.type == "mujoco")
+        cfg.yaml["viewer"] = false;
       cfg.realtime = false;
     }
     s::LoopOptions opts;
-    opts.realtime = cfg.type != "mujoco" || cfg.realtime ||
-                    (!cfg.yaml["viewer"] || cfg.yaml["viewer"].as<bool>());
+    opts.realtime = hardware || cfg.realtime ||
+                    (cfg.type == "mujoco" && (!cfg.yaml["viewer"] || cfg.yaml["viewer"].as<bool>()));
     if (cfg.type == "replay")
       opts.realtime = false;
     if (args.count("rate"))

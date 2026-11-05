@@ -69,6 +69,18 @@ if(BUILD_TESTING)
   add_test(NAME tracking_loop_cli COMMAND boltrt --task tracking --robot "${fixture}/base_robot.yaml"
     --policy "${fixture}/base_policy.yaml" --backend "${fixture}/base_backend.yaml"
     --motion "${fixture}/motion/c_float32.npz" --start --steps 2 --no-keyboard)
+  # Record ten ticks, then replay them: every recorded state must reach the policy.
+  set(replay_states "${CMAKE_CURRENT_BINARY_DIR}/replay_states.jsonl")
+  file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/replay_backend.yaml" "type: replay\npath: ${replay_states}\n")
+  add_test(NAME replay_record COMMAND boltrt --robot "${fixture}/base_robot.yaml"
+    --policy "${fixture}/base_policy.yaml" --backend "${fixture}/base_backend.yaml"
+    --start --steps 10 --no-keyboard --record "${replay_states}")
+  set_tests_properties(replay_record PROPERTIES FIXTURES_SETUP replay_states)
+  add_test(NAME replay_roundtrip COMMAND boltrt --robot "${fixture}/base_robot.yaml"
+    --policy "${fixture}/base_policy.yaml" --backend "${CMAKE_CURRENT_BINARY_DIR}/replay_backend.yaml"
+    --headless --start --no-keyboard)
+  set_tests_properties(replay_roundtrip PROPERTIES FIXTURES_REQUIRED replay_states
+    PASS_REGULAR_EXPRESSION "ticks=10 ")
 
   add_executable(hardware_tests tests/hardware_tests.cpp)
   target_link_libraries(hardware_tests PRIVATE boltrt_backend)

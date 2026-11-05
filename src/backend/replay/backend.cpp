@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "boltrt/backend/backend.hpp"
 #include <fstream>
+#include <optional>
 #include <nlohmann/json.hpp>
 namespace boltrt {
 namespace {
@@ -16,10 +17,29 @@ public:
     if (!input_)
       throw std::runtime_error("state replay unavailable");
   }
+  // Like the MuJoCo backend, feedback advances only after a command is submitted:
+  // repeated reads return the same recorded state, so tick i sees recorded line i.
   std::optional<RobotState> read_state() override {
+    if (current_ && !advance_)
+      return current_;
+    advance_ = false;
     std::string line;
     if (!std::getline(input_, line))
-      return std::nullopt;
+      return current_ = std::nullopt;
+    current_ = parse(line);
+    return current_;
+  }
+  void submit(const JointCommand &c) override {
+    validate_command(c, robot_.joints.size());
+    advance_ = true;
+  }
+  void stop() noexcept override {
+    if (input_.is_open())
+      input_.close();
+  }
+
+private:
+  RobotState parse(const std::string &line) const {
     auto j = nlohmann::json::parse(line);
     RobotState s;
     s.q = j.at("q").get<Vec>();
@@ -51,16 +71,12 @@ public:
     s.time = j.at("time").get<double>();
     return s;
   }
-  void submit(const JointCommand &c) override { validate_command(c, robot_.joints.size()); }
-  void stop() noexcept override {
-    if (input_.is_open())
-      input_.close();
-  }
 
-private:
   RobotSpec robot_;
   std::filesystem::path path_;
   std::ifstream input_;
+  std::optional<RobotState> current_;
+  bool advance_ = false;
 };
 } // namespace
 void register_replay_backend(BackendRegistry &r) {
