@@ -16,4 +16,5 @@ __pycache__/
 # Docs site
 docs/node_modules/
 docs/build/
+docs/build-*/
 docs/.docusaurus/

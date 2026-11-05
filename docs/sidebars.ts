@@ -5,11 +5,13 @@ const sidebars: SidebarsConfig = {
     'intro',
     {
       type: 'category',
+      collapsible: false,
       label: 'Getting Started',
       items: ['getting-started/installation', 'getting-started/quickstart'],
     },
     {
       type: 'category',
+      collapsible: false,
       label: 'Core',
       items: [
         'core/architecture',
@@ -21,11 +23,13 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'category',
+      collapsible: false,
       label: 'Tasks',
       items: [
         'tasks/overview',
         {
           type: 'category',
+      collapsible: false,
           label: 'Tracking',
           items: [
             'tasks/track/overview',
@@ -39,6 +43,7 @@ const sidebars: SidebarsConfig = {
     'real-robots',
     {
       type: 'category',
+      collapsible: false,
       label: 'Extending',
       items: [
         'extending/add-observation',
@@ -50,6 +55,7 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'category',
+      collapsible: false,
       label: 'Reference',
       items: ['reference/cli', 'reference/performance', 'reference/licensing'],
     },

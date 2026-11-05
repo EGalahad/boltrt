@@ -1,5 +1,5 @@
 ---
-slug: /
+slug: /intro
 sidebar_label: Introduction
 ---
 
@@ -17,7 +17,7 @@ deployment runtime for learned robot policies.
 A run is always the combination of three configurations plus an optional task:
 
 ```bash
-boltrt --robot g1 --policy policy.yaml --backend mujoco [--task tracking]
+boltrt [--task tracking] --robot g1 --policy policy.yaml --backend mujoco
 ```
 
 | Piece | Owns |
@@ -34,3 +34,6 @@ boltrt --robot g1 --policy policy.yaml --backend mujoco [--task tracking]
 - Running tracking policies, motions and teleop: [Tracking task](tasks/track/overview.md).
 - Deploying on hardware: [Real robots](real-robots.md).
 - Adding your own policy, robot or backend: [Extending](extending/add-observation.md).
+- Working with a coding agent: the repository ships a
+  [`boltrt-extend` skill](extending/agent-skill.md) that walks agents such as
+  Claude Code and Codex through these tasks.
