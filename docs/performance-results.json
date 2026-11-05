@@ -1,0 +1,55 @@
+{
+  "robot": "g1",
+  "policy": "MimicLite v1.1",
+  "motion": "walk1_subject1",
+  "date": "2026-11-04",
+  "onnxruntime": "1.23.2",
+  "provider": "CPUExecutionProvider",
+  "ort_threads": 1,
+  "cpu_affinity": [
+    0
+  ],
+  "warmup_per_trial": 200,
+  "measured_per_trial": 2000,
+  "trials": 5,
+  "cpu": "Intel Core i9-13900H",
+  "python": "3.10.0",
+  "scope": "policy compute only; physics, feedback reads, rendering, recording, sleep and startup excluded",
+  "python_runtime": "original IntegratedPolicyRuntime.step with identical native robot feedback replay",
+  "inference_scope": "inference adapter call, including CPU ONNX Run and binding/copy overhead",
+  "checkpoints_sha256": {
+    "policy.yaml": "4cc74220a3aa565baa02a21b725e2de89c7c333d52b06b18b21ddd1f46bb34db",
+    "policy.onnx": "f647b2674a593cdc9e3b661f653b3f0f120238523a79f3ec7765bc480af22f48",
+    "walk1_subject1.npz": "3897136f968b099f8248c0f6db1496644fec7c3f3b3493533603ca2f6d239214"
+  },
+  "python_head": "aa4294c1be0d3ad8c106f4ef6e14d88eb1956ed8",
+  "python_source_sha256": {
+    "integrated_runtime": "a602d1262b191dda994e1103c7ab26ea693b8f8d6a56cd7a1ffb1b0a13b0e074",
+    "inference_adapter": "7bba9b0e829c7466ca0d2867379237c558dfe04625666e057d6f62053b7824a2"
+  },
+  "native_revision": "10a7c5cd01b79ef72deac7a210cd94458b2421fd",
+  "build": "Release -O3, GCC 13.3.0, sim-only, viewer OFF",
+  "native_binary_sha256": "e0d1a37fb3755d37193e04227d4c54019c9ee5a48992c2a87840e2731a58f3e5",
+  "summary_ms": {
+    "Python": {
+      "inference_ms": {
+        "p50": 0.515776,
+        "max": 1.727289
+      },
+      "policy_ms": {
+        "p50": 1.458484,
+        "max": 3.190976
+      }
+    },
+    "C++": {
+      "inference_ms": {
+        "p50": 0.4229535,
+        "max": 0.984647
+      },
+      "policy_ms": {
+        "p50": 0.4489375,
+        "max": 1.02922
+      }
+    }
+  }
+}

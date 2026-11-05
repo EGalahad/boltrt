@@ -1,0 +1,96 @@
+{
+  "date": "2026-11-02",
+  "scope": "Same-state Python migration adapter validation; historical frozen reference windows, not tracking-quality scores",
+  "configurations": [
+    {
+      "policy": "bfm-zero/exp_lafan40-100style_update_z10",
+      "frames": 32,
+      "result": "passed",
+      "max_action_error": 1.3075768947601318e-06
+    },
+    {
+      "policy": "grit/v0_0_1",
+      "frames": 32,
+      "result": "passed",
+      "max_action_error": 2.6226043701171875e-06
+    },
+    {
+      "policy": "heft/compliance",
+      "frames": 32,
+      "result": "passed",
+      "max_action_error": 3.039836883544922e-06
+    },
+    {
+      "policy": "heft/pmg",
+      "frames": 32,
+      "result": "passed",
+      "max_action_error": 2.5779008865356445e-06
+    },
+    {
+      "policy": "holomotion/v1_4_0",
+      "frames": 32,
+      "result": "passed",
+      "max_action_error": 4.231929779052734e-06
+    },
+    {
+      "policy": "humanoid-gpt",
+      "frames": 32,
+      "result": "passed",
+      "max_action_error": 1.846998929977417e-05
+    },
+    {
+      "policy": "scalebfm/humanoid_transformer_m",
+      "frames": 32,
+      "result": "passed",
+      "max_action_error": 1.9073486328125e-06
+    },
+    {
+      "policy": "scalebfm/humanoid_transformer_xl",
+      "frames": 32,
+      "result": "passed",
+      "max_action_error": 1.9073486328125e-06
+    },
+    {
+      "policy": "sonic/low_latency/g1",
+      "frames": 32,
+      "result": "passed",
+      "max_action_error": 1.430511474609375e-06
+    },
+    {
+      "policy": "sonic/low_latency/smpl",
+      "frames": 32,
+      "result": "passed",
+      "max_action_error": 5.960464477539062e-07
+    },
+    {
+      "policy": "sonic/release/g1",
+      "frames": 32,
+      "result": "passed",
+      "max_action_error": 2.86102294921875e-06
+    },
+    {
+      "policy": "sonic/release/smpl",
+      "frames": 32,
+      "result": "passed",
+      "max_action_error": 7.152557373046875e-07
+    },
+    {
+      "policy": "sonic/v1_1/g1",
+      "frames": 32,
+      "result": "passed",
+      "max_action_error": 1.9073486328125e-06
+    },
+    {
+      "policy": "teleopit",
+      "frames": 32,
+      "result": "passed",
+      "max_action_error": 2.384185791015625e-06
+    },
+    {
+      "policy": "twist2",
+      "frames": 32,
+      "result": "passed",
+      "max_action_error": 4.035234451293945e-05
+    }
+  ]
+}

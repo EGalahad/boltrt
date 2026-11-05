@@ -6,7 +6,7 @@ Deploy any policy on MuJoCo or real robots with one C++ loop.
 
 - **Modular observations.** Register plugins and select them in YAML.
 - **One binary.** Change `--backend mujoco` to `--backend g1` to select a real robot adapter.
-- **Native C++.** CPU ONNX inference with a small, measured policy-loop overhead; see [performance](docs/performance.md).
+- **Native C++.** MimicLite CPU `policy_ms`: **p50 0.449 ms / max 1.029 ms**; [measurement](docs/performance.md).
 
 ## Installation
 

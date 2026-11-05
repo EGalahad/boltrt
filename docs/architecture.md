@@ -72,3 +72,10 @@ To add a backend, implement `RobotBackend` and register its factory. Keep SDK
 includes, lifecycle and build rules inside its own `backend/<name>/` directory.
 To add another task domain, derive from `PolicyLoop`, bind an optional task
 context, and override the task hooks; do not add its behavior to the base loop.
+
+Tasks register a factory, an optional observation-registration callback and their
+own CLI option names with `TaskRegistry::add` in the application. The base task
+is built in; `register_tracking_task(tasks)` is the only tracking composition
+entry point in `apps/boltrt.cpp`. Task-owned options cannot be used with another
+task. Additional domains can use their own `src/tasks/<domain>/` target without
+adding dependencies to `boltrt_core`.
