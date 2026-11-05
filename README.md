@@ -63,7 +63,8 @@ and how to extend Bolt Runtime.
 | Status | |
 |---|---|
 | MuJoCo, CPU ONNX Runtime, ZMQ teleop | ✅ |
-| Unitree G1 / RoboParty RP1 backends | 🧪 build and pass `--validate`; not yet run on hardware |
+| Unitree G1 / RoboParty RP1 (serial ankles) on hardware | ✅ |
+| RoboParty RP1 parallel-ankle output on hardware | 🧪 not yet run on hardware |
 | GPU inference (CUDA / TensorRT) | ❌ |
 
 ## License

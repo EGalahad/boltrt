@@ -76,5 +76,4 @@ The clean build completed G1 MimicLite `walk1_subject1` headless playback
 tracking-quality scoring. PTY terminal controls/restoration and canonical ZMQ
 continuity/disconnect checks also passed.
 
-Hardware remains experimental and has not run on physical robots.
 CUDA/TensorRT and the complete tracking benchmark remain unsupported.

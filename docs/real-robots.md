@@ -1,10 +1,9 @@
 # Real robots
 
-:::warning
-Hardware support is new. The G1 backend has been compiled and validated without
-devices; RP1 serial tracking has run on hardware; RP1 parallel-ankle output has
-not. Run `--validate` first, keep the robot suspended for the first runs, and
-have an emergency stop ready.
+:::note
+G1 and RP1 (serial ankles) run on hardware. RP1 parallel-ankle output
+(`rp1-parallel`) has not been run on hardware yet. As with any new policy, run
+`--validate` first and keep an emergency stop ready.
 :::
 
 ## Build
