@@ -43,6 +43,7 @@ const config: Config = {
             'node_modules/**',
           ],
           sidebarPath: './sidebars.ts',
+          breadcrumbs: false,
           routeBasePath: '/',
           editUrl: `${repo}/tree/main/docs/`,
         },
