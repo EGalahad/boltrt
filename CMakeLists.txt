@@ -27,7 +27,7 @@ find_library(ORT_LIB onnxruntime HINTS "${ORT_ROOT}/lib" REQUIRED)
 find_library(ZMQ_LIB NAMES zmq libzmq.so.5 REQUIRED)
 
 add_library(boltrt_core
-  src/config/config.cpp src/backend/backend.cpp
+  src/config/config.cpp src/config/hf_hub.cpp src/backend/backend.cpp
   src/observation/observation.cpp src/observation/common.cpp src/runtime/task.cpp src/runtime/policy_loop.cpp src/runtime/terminal.cpp)
 target_include_directories(boltrt_core PUBLIC include third_party/include)
 target_link_libraries(boltrt_core PUBLIC Eigen3::Eigen yaml-cpp Threads::Threads)

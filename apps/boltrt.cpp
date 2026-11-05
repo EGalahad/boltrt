@@ -49,7 +49,7 @@ int main(int argc, char **argv) {
                    "until stopped)\n"
                    "  --run-once --record <jsonl> --events <json> --no-keyboard\n"
                    "  --ort-threads 1 --init-steps 500 --config-root <directory>\n"
-                   "  --robot-model <xml|hf://cached-asset>\n"
+                   "  --robot-model <xml|hf://asset>\n"
                    "  --timings <csv>       Save per-tick policy and inference latency\n"
                    "  --headless            Disable MuJoCo window and realtime "
                    "pacing\n"

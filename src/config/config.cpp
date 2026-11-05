@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "boltrt/config/config.hpp"
+#include "hf_hub.hpp"
 #include <algorithm>
 #include <cstdlib>
 #include <fstream>
@@ -93,28 +94,7 @@ std::filesystem::path resolve_asset(const std::string &value, const std::filesys
       rev = repo.substr(at + 1);
       repo.resize(at);
     }
-    std::string cache;
-    if (auto p = std::getenv("HF_HUB_CACHE"))
-      cache = p;
-    else if (auto p = std::getenv("HF_HOME"))
-      cache = std::string(p) + "/hub";
-    else {
-      auto h = std::getenv("HOME");
-      if (!h)
-        throw std::runtime_error("HOME missing");
-      cache = std::string(h) + "/.cache/huggingface/hub";
-    }
-    auto sep = repo.find('/');
-    auto r = std::filesystem::path(cache) /
-             ("models--" + repo.substr(0, sep) + "--" + repo.substr(sep + 1));
-    if (std::filesystem::exists(r / "refs" / rev)) {
-      std::ifstream f(r / "refs" / rev);
-      std::getline(f, rev);
-    }
-    auto result = r / "snapshots" / rev / file;
-    if (!std::filesystem::is_regular_file(result))
-      throw std::runtime_error("asset absent from offline HF cache: " + value);
-    return std::filesystem::absolute(result); // preserve snapshot directory for mesh paths
+    return hf::resolve(repo, rev, file, value); // snapshot directory keeps mesh paths valid
   }
   if (value.find("://") != std::string::npos)
     throw std::runtime_error("unsupported asset URI: " + value);
