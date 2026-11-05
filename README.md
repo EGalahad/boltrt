@@ -1,105 +1,79 @@
-# boltrt
+# Bolt Runtime
 
-Deploy any policy on MuJoCo or real robots with one C++ loop.
+**Bolt any policy onto any robot.**
 
-![G1 in the native MuJoCo viewer](docs/media/g1.png)
+[![CI](https://github.com/EGalahad/boltrt/actions/workflows/ci.yml/badge.svg)](https://github.com/EGalahad/boltrt/actions/workflows/ci.yml)
+[![Docs](https://img.shields.io/badge/docs-egalahad.github.io%2Fboltrt-blue)](https://egalahad.github.io/boltrt/)
+[![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 
-- **Modular observations.** Register plugins and select them in YAML.
-- **One binary.** Change `--backend mujoco` to `--backend g1` to select a real robot adapter.
-- **Native C++.** MimicLite CPU `policy_ms`: **p50 0.449 ms / max 1.029 ms**; [measurement](docs/performance.md).
+- **Modular observations**: adapt a new policy by composing registered observation terms in its YAML.
+- **Seamless sim-to-real**: MuJoCo and real robots implement one interface, decoupled from the policy, so switching is just `--backend`.
+- **Fast**: native C++ runs the full policy step 3.25× faster than the Python stack.
 
-## Installation
+![Modular observations, seamless sim-to-real, and policy-step latency](docs/media/overview.png)
 
-Linux, CMake 3.22+, C++20. On Ubuntu:
+## Quick start (sim2sim)
+
+Linux (x86_64 or aarch64), CMake 3.22+, a C++20 compiler.
 
 ```bash
 sudo apt-get install cmake g++ curl libeigen3-dev libyaml-cpp-dev \
   zlib1g-dev libzmq3-dev libglfw3-dev libgl1-mesa-dev
 ./tools/fetch-deps.sh --sim-only
-cmake --preset sim
-cmake --build --preset sim --parallel 4
-ctest --preset sim
+cmake --preset sim && cmake --build --preset sim --parallel
 export PATH="$PWD/build/sim:$PATH"
 ```
 
-Cache the G1 assets once (see [asset setup](docs/usage.md#assets)), then try the
-included minimal zero-action test policy:
+Download a checkpoint such as `mimic-lite/v1_1` from the
+[checkpoint folder](https://drive.google.com/drive/folders/1lrPyiiy7anyG3P4wHNIQQQlydboLPd9e)
+and run it. Robot models are pulled from Hugging Face on first use.
 
 ```bash
-boltrt --robot g1 --policy examples/base-policy.yaml --backend mujoco
+boltrt --task tracking --robot g1 --backend mujoco \
+  --policy mimic-lite/v1_1/policy.yaml \
+  --motion motions/walk1_subject1.npz
 ```
 
-Omitting `--task` runs the generic, motion-independent base loop. To use a trained
-tracking export from the shared [checkpoint folder](https://drive.google.com/drive/folders/1lrPyiiy7anyG3P4wHNIQQQlydboLPd9e):
+With the terminal focused, press `I` → `]` → `Space` to initialize, enter the
+policy and play the motion.
 
-```bash
-boltrt --robot g1 --policy policy.yaml --backend mujoco --task tracking
-```
+## Supported policies
 
-Add `--motion motions/walk1_subject1.npz` to track a clip; otherwise tracking uses
-a static reference at the default posture. In the terminal, use `I` to initialize,
-`]` to enter policy, and `Space` to play/pause the reference. MuJoCo controls
-physics independently. The included base test policy is not a trained controller.
+Original deploy exports load as-is.
 
-## Policies and validation
+| Family | Robot |
+|---|---|
+| MimicLite | G1, RP1 |
+| BFM-Zero · GRIT · HEFT · HoloMotion · Humanoid-GPT | G1 |
+| ScaleBFM · SONIC (incl. SMPL input) · TeleopIT · TWIST2 | G1 |
 
-**BFM-Zero · GRIT · HEFT · HoloMotion · Humanoid-GPT · ScaleBFM · SONIC ·
-TeleopIT · TWIST2 · MimicLite.** Original deploy exports remain loadable;
-new exports can put ONNX bindings in YAML and need only two files.
+All 15 external configurations match their original Python deployment within a
+maximum action difference of 4.0e-5 from identical states
+([details](https://egalahad.github.io/boltrt/tasks/track/policies)).
 
-Python migration parity was checked on **15 external configurations × 32 ticks**
-using identical robot states/reference windows; maximum absolute action difference
-was **4.04e-5**. This is adapter parity, not a tracking-quality benchmark.
-See [validation and performance](docs/performance.md).
+## Documentation
 
-G1 and RP1 hardware backends are **experimental**: compiled and checked with
-`--validate`, **not run on physical robots**. CUDA/TensorRT and the complete
-tracking benchmark are not supported.
+[egalahad.github.io/boltrt](https://egalahad.github.io/boltrt/) covers the core
+architecture, observations and backends, the tracking task, teleop, real robots
+and how to extend Bolt Runtime.
 
-## Robot builds
-
-```bash
-sudo apt-get install libfmt-dev libspdlog-dev libboost-dev
-./tools/fetch-deps.sh --g1 --rp1
-cmake --preset robots
-cmake --build --preset robots --parallel 4
-ctest --preset robots
-```
-
-`BOLTRT_G1` and `BOLTRT_RP1` default to OFF. Enable either independently with
-CMake; `BOLTRT_VIEWER=OFF` builds without a native window. CI builds sim-only,
-runs CTest, and does not fetch hardware SDKs.
-
-## Teleop and extensions
-
-A separate publisher sends reference motion over ZMQ:
-
-```bash
-boltrt --task tracking --robot g1 --policy policy.yaml --backend mujoco \
-  --motion tcp://127.0.0.1:5555
-```
-
-Robot I/O always stays inline. See [usage and controls](docs/usage.md),
-[architecture and plugins](docs/architecture.md), and the
-[observation example](examples/custom_observation.cpp).
-Register new observations with `ObservationRegistry::add`; implement
-`RobotBackend` to add another backend. `TrackingLoop` extends the generic,
-motion-independent `PolicyLoop`.
+| Status | |
+|---|---|
+| MuJoCo, CPU ONNX Runtime, ZMQ teleop | ✅ |
+| Unitree G1 / RoboParty RP1 backends | 🧪 build and pass `--validate`; not yet run on hardware |
+| GPU inference (CUDA / TensorRT) | ❌ |
 
 ## License
 
-The core is [Apache-2.0](LICENSE). **Enabling `BOLTRT_RP1` links GPL-3.0-only
-RoboParty code; distribute that linked binary under GPL-3.0.** RP1 is disabled by
-default, and no RP1-enabled prebuilt binaries are published.
-Dependencies retain their upstream licenses; see [licensing](docs/licensing.md).
+The core is [Apache-2.0](LICENSE). Building with `BOLTRT_RP1=ON` links
+GPL-3.0-only RoboParty code; that binary must be distributed under GPL-3.0.
+See [licensing](docs/reference/licensing.md).
 
 ## Acknowledgements
 
 Built on [MuJoCo](https://github.com/google-deepmind/mujoco),
 [ONNX Runtime](https://github.com/microsoft/onnxruntime),
-[unitree_sdk2](https://github.com/unitreerobotics/unitree_sdk2), and
+[unitree_sdk2](https://github.com/unitreerobotics/unitree_sdk2) and
 [roboparty_deploy](https://github.com/Roboparty/roboparty_deploy).
-Layout inspiration: mink, mjctrl, mjlab, and obj2mjcf.
-
-Boltrt is a standalone C++ migration from [Python sim2real](https://github.com/EGalahad/sim2real);
-the Python repository remains independent and unchanged.
+Thanks to the authors of every policy listed above.
+Bolt Runtime is the C++ successor to the Python [sim2real](https://github.com/EGalahad/sim2real).
