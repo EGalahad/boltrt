@@ -11,7 +11,7 @@ const config: Config = {
   title: 'Bolt Runtime',
   tagline: 'Bolt any policy onto any robot',
 
-  url: 'https://egalahad.github.io',
+  url: process.env.DOCS_SITE_URL ?? 'https://egalahad.github.io',
   baseUrl: '/boltrt/',
 
   organizationName: 'EGalahad',
