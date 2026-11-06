@@ -3,7 +3,7 @@
 **Bolt any policy onto any robot.**
 
 [![CI](https://github.com/EGalahad/boltrt/actions/workflows/ci.yml/badge.svg)](https://github.com/EGalahad/boltrt/actions/workflows/ci.yml)
-[![Docs](https://img.shields.io/badge/docs-egalahad.github.io%2Fboltrt-blue)](https://egalahad.github.io/boltrt/)
+[![Docs](https://img.shields.io/badge/docs-haoyangweng.pages.dev%2Fboltrt-blue)](https://haoyangweng.pages.dev/boltrt/)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 
 - **Modular observations**: adapt a new policy by composing registered observation terms in its YAML.
@@ -56,7 +56,7 @@ known pitfalls of this codebase. Ask, for example, "deploy my checkpoint on G1".
 
 ## Documentation
 
-[egalahad.github.io/boltrt](https://egalahad.github.io/boltrt/) covers the core
+[haoyangweng.pages.dev/boltrt](https://haoyangweng.pages.dev/boltrt/) covers the core
 architecture, observations and backends, the tracking task, teleop, real robots
 and how to extend Bolt Runtime.
 
